@@ -1,0 +1,64 @@
+/* Planning */
+body {
+    background: #FFFFFF;
+    overflow: auto;
+  }
+
+.floatingBoxPlanning {
+	margin-left: 0;
+}
+.floatingBoxPlanning .floatingBox {
+	margin-bottom: 0;
+	box-shadow: none;
+}
+div.row-fluid {
+  margin-bottom: 0;
+}
+.floatingBoxPlanning .floatingBox div.row-fluid {
+  margin-bottom: 10px;
+}
+
+.floatingBoxPlanning .floatingBox .headline {
+  display: block;
+  margin: 2px 0 0 0;
+  border-bottom: 2px dotted #e4e9f0;
+}
+.floatingBoxPlanning .floatingBox .headline h3 {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0 0 -3px 0;
+  padding-bottom: 2px;
+  display: inline-block;
+  color: #e2007a;
+  line-height: 25px;
+}
+.floatingBoxPlanning .floatingBox span {
+  font-size: 15px;
+  margin: 0 0 -3px 0;
+  padding-bottom: 2px;
+  display: inline-block;
+}
+.floatingBoxPlanning form.form-horizontal {
+    margin-top: 5px;
+}
+.floatingBoxPlanning form.form-horizontal.contentForm .control-group {
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+} 
+.floatingBoxPlanning .formFooter {
+	padding: 5px 30px;
+}
+form.form-horizontal {
+	margin-bottom: 0;
+}
+.floatingBox {
+	margin-bottom: 0;
+}
+form .formFooter {
+    padding: 5px 30px 0 30px;
+}
+@media (max-width: 1170px) {
+	 .content {
+	  padding: 0;
+	}
+}

@@ -1,0 +1,66 @@
+{% extends '::baseBack.html.twig' %}
+{% form_theme form 'form_table_layout.html.twig' %}
+{% block body -%}
+    <div class="content">
+        <div class="container-fluid">
+
+            <!-- ==================== COMMON ELEMENTS ROW ==================== -->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- ==================== TEXT INPUTS HEADLINE ==================== -->
+                    <div class="containerHeadline">
+                        <i class="icon-edit"></i><h2>Editer le contrat</h2>
+                        <div class="controlButton pull-right"><i class="icon-caret-down minimizeElement"></i></div>
+                    </div>
+                    <!-- ==================== END OF TEXT INPUTS HEADLINE ==================== -->
+
+                    <!-- ==================== TEXT INPUTS FLOATING BOX ==================== -->
+                    <div class="floatingBox">
+                        <div class="container-fluid">
+                            <div class="container-fluid">
+                                {% if id is defined %}
+                                <form method="POST"
+                                      action="{{ path('user_contract_update_manager', { 'user_id': user_id, 'id': id }) }}">
+                                    {% else %}
+                                    <form class=" contentForm" method="POST"
+                                          action="{{ path('user_contract_add_manager', { 'user_id': user_id }) }}">
+                                        {% endif %}
+
+                                    {{ form_row(form.type) }}
+                                    {{ form_row(form.salaire1) }}
+                                    {{ form_row(form.salaire2) }}
+                                    {{ form_row(form.starDate) }}
+                                    {{ form_row(form.endDate) }}
+                                    {{ form_row(form.status) }}
+
+
+
+                                    <div class="formFooter">
+                                        <button type="submit" class="btn btn-success"><i class="icon-ok"> </i> Valider</button>
+                                        <button type="reset" class="btn btn-danger"><i class="icon-remove"> </i> Effacer</button>
+                                        <a href="{{ path('user_contract_homepage',{'user_id':user_id}) }}"><button class="btn btn-inverse" type="button"><i class="icon-list"></i> Liste</button></a>
+                                        {{ form_widget(form._token) }}
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ==================== END OF TEXT INPUTS FLOATING BOX ==================== -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <!-- masked inputs -->
+    <script src="{{ asset('RessourcesBack/js/lib/jquery-inputmask/jquery.inputmask.min.js') }}"></script>
+    <script src="{{ asset('RessourcesBack/js/lib/jquery-inputmask/jquery.inputmask.extensions.js') }}"></script>
+    <script src="{{ asset('RessourcesBack/js/lib/jquery-inputmask/jquery.inputmask.date.extensions.js') }}"></script>
+    <script>
+        $("#user_userbundle_contract_starDate").inputmask("date");
+        $("#user_userbundle_contract_endDate").inputmask("date");
+
+    </script>
+{% endblock %}

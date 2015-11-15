@@ -1,0 +1,65 @@
+{% extends '::baseBack.html.twig' %}
+{% block body -%}
+    <!-- ==================== PAGE CONTENT ==================== -->
+    <div class="content">
+        <!-- ==================== WIDGETS CONTAINER ==================== -->
+        <div class="container-fluid">
+            <a href="{{ path('user_contract_add_manager', { 'user_id': user_id }) }}">
+                <button class="btn btn-danger" type="button"><i class="icon-plus"></i> Ajouter</button>
+            </a>
+            <a href="{{ path('user_contract_update_manager', { 'user_id': user_id, 'id': entity.id }) }}">
+                <button class="btn btn-info" type="button"><i class="icon-pencil"></i> Modifier</button>
+            </a>
+
+            <a class="btn btn-inverse pull-right" href="{{ path('user_contract_homepage', { 'user_id': user_id }) }}"><i class="icon-list"></i>
+                Liste</a>
+
+            <!-- ==================== END OF ROW ==================== -->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- ==================== DEFAULT TABLE HEADLINE ==================== -->
+                    <div class="containerHeadline">
+                        <i class="icon-desktop"></i>
+                        <h2>Affichage du contrat</h2>
+                    </div>
+                    <!-- ==================== END OF DEFAULT TABLE HEADLINE ==================== -->
+                    <!-- ==================== DEFAULT TABLE FLOATING BOX ==================== -->
+                    <div class="floatingBox table">
+                        <div class="container-fluid">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <th>Type de contrat</th>
+                                    <td>{% if entity.type ==0 %} CDD {% elseif entity.type==1 %} CDI {% elseif entity.type==2 %} Stage {% elseif entity.type==3 %}Freelance{% endif %}</td>
+                                </tr>
+                                <tr>
+                                    <th>Salaire 1</th>
+                                    <td>{{ entity.salaire1 }} TND</td>
+                                </tr>
+                                <tr>
+                                    <th>Salaire 2</th>
+                                    <td>{{ entity.salaire2 }} TND</td>
+                                </tr>
+                                <tr>
+                                    <th>Date de début de contrat</th>
+                                    <td>{{ entity.starDate|date("m/d/Y") }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date de fin de contrat</th>
+                                    <td>{{ entity.endDate|date("m/d/Y") }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Activé?</th>
+                                    <td>{% if entity.status ==1 %} Oui {% else %} Non {% endif %}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ==================== END OF WIDGETS CONTAINER ==================== -->
+    </div>
+    <!-- ==================== END OF PAGE CONTENT ==================== -->
+{% endblock %}

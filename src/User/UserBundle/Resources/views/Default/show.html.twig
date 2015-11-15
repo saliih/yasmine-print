@@ -1,0 +1,88 @@
+{% extends '::baseBack.html.twig' %}
+
+{% block body -%}
+    <!-- ==================== PAGE CONTENT ==================== -->
+    <div class="content">
+
+        <!-- ==================== WIDGETS CONTAINER ==================== -->
+        <div class="container-fluid">
+            <a href="{{ path('add_users') }}">
+                <button class="btn btn-danger" type="button">Ajouter</button>
+            </a>
+
+            <!-- ==================== END OF ROW ==================== -->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- ==================== DEFAULT TABLE HEADLINE ==================== -->
+                    <div class="containerHeadline">
+                        <i class="icon-table"></i>
+
+                        <h2>liste Utilisateur</h2>
+                    </div>
+                    <!-- ==================== END OF DEFAULT TABLE HEADLINE ==================== -->
+
+                    <!-- ==================== DEFAULT TABLE FLOATING BOX ==================== -->
+                    <div class="floatingBox table">
+                        <div class="container-fluid">
+                            <table class="table">
+                                <thead>
+                                <tr role="row">
+                                    <th>Utilisateur</th>
+                                    <th>Login</th>
+                                    <th>Email</th>
+                                    <th>Rôle</th>
+                                    <th>Activé?</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for entry in users %}
+
+                                    <tr>
+                                        <td>
+                                            <a href="#">{{ entry.name|e }} </a>
+                                        </td>
+                                        <td>{{ entry.username|e }}</td>
+                                        <td> {{ entry.email }}</td>
+                                        <td> {{ entry.roles[0] }}</td>
+                                        <td>
+                                            {% if entry.enabled==1 %}<span
+                                                    class="label label-success ptip_ne">Activé</span>{% else %}<span
+                                                    class="label label-danger ptip_ne">Désactivé</span> {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="btn-toolbar" style="margin: 0;">
+                                                <div class="btn-group">
+                                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                                        Action <span
+                                                                class="caret"></span></button>
+                                                    <ul class="dropdown-menu pull-right">
+
+                                                        <li>
+                                                            <a href="{{ path('view_users', {'id': entry.id}) }}">Modifier </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:confirmdeletbox('{{ path('delete_users', {'id': entry.id}) }}')">Supprimer</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ==================== END OF WIDGETS CONTAINER ==================== -->
+    </div>
+
+    <!-- ==================== END OF PAGE CONTENT ==================== -->
+{% endblock %}

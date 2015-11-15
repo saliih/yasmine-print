@@ -1,0 +1,45 @@
+fos_user_security:
+    resource: routing/security.xml
+
+fos_user_profile:
+    resource: routing/profile.xml
+    prefix: /profile
+
+fos_user_register:
+    resource: routing/registration.xml
+    prefix: /register
+
+fos_user_resetting:
+    resource: routing/resetting.xml
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: routing/change_password.xml
+    prefix: /profile
+    
+show_users:    
+    path:     /liste
+    defaults: { _controller: UserUserBundle:Default:show }
+add_users:
+    path: /register
+    defaults: { _controller: UserUserBundle:Registration:register}
+view_users:
+    path:     /update/{id}
+    defaults: { _controller: UserUserBundle:Registration:edit}
+    requirements:
+        id: \d+
+update_profile_users:
+    path:     /editprofile
+    defaults: { _controller: UserUserBundle:Registration:edit2}
+
+delete_users:
+    path:     /delete/{id}
+    defaults: { _controller: UserUserBundle:Registration:delete}
+    requirements:
+        id: \d+
+user_contract_homepage:
+    resource: "@UserUserBundle/Resources/config/routing/contract.yml"
+    prefix:   /contract
+user_vote_partner:
+    path:     /partnervote
+    defaults: { _controller: UserUserBundle:Voter:vote}

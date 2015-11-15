@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <title>{% block title %}.: Yasmine Press Backoffice :.{% endblock %}</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('RessourcesBack/css/bootstrap-responsive.min.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('RessourcesBack/css/styles.css') }}" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('RessourcesBack/css/jquery.fancybox.css') }}">
+    {% block stylesheets %}
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+{% set notifications = listeNotification( app.user.id ) %}
+
+<body class="validationForm">
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to
+    improve your experience.</p>
+<![endif]-->
+
+<!-- ==================== TOP MENU ==================== -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="{{ path('back_dash_homepage') }}"><img class="img-responsive" src="{{ asset('RessourcesBack/img/logo.png') }}"> </a>
+
+            <div class="nav pull-right">
+                <form class="navbar-form">
+                    <div class="input-append">
+                        <div class="collapsibleContent">
+
+                            <a href="#notificationsContent" class="sidebar"><span
+                                        class="add-on add-on-middle add-on-mini add-on-dark" id="notifications"><i
+                                            class="icon-bell-alt"></i><span
+                                            class="notifyCircle orange">{{ notifications|length }}</span></span></a>
+                            {% set cntcmt=render(controller('BackDealBundle:Comment:countcomment')) %}
+                            {% if app.user.roles[0]=='ROLE_SUPER_ADMIN' or app.user.roles[0]=='SERVICECLIENT' or app.user.roles[0]=='CHEFSERVICECLI'  %}
+
+                            <a href="#messagesContent" class="sidebar"><span
+                                        class="add-on add-on-middle add-on-mini add-on-dark" id="messages"><i
+                                            class="icon-comments-alt"></i>{% if cntcmt>0 %}<span
+                                            class="notifyCircle red">{{ cntcmt }}</span>{% endif %}</span></a>
+                            {% endif %}
+                            <a href="#profileContent" class="sidebar"><span class="add-on add-on-mini add-on-dark"
+                                                                            id="profile"><i class="icon-user"></i><span
+                                            class="username">{{ app.user.name }}</span></span></a>
+                        </div>
+                        <a href="#collapsedSidebarContent" class="collapseHolder sidebar"><span
+                                    class="add-on add-on-mini add-on-dark"><i class="icon-sort-down"></i></span></a>
+                    </div>
+                </form>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+
+<!-- ==================== SIDEBAR ==================== -->
+<div class="hiddenContent">
+    <!-- ==================== SIDEBAR COLLAPSED ==================== -->
+    <div id="collapsedSidebarContent">
+        <div class="sidebarDivider"></div>
+        <div class="sidebarContent">
+            <ul class="collapsedSidebarMenu">
+
+                <li><a href="#notificationsContent" class="sidebar">Notifications
+                        <div class="notifyCircle orange">{{ notifications|length }}</div>
+                        <i class="icon-chevron-sign-right"></i></a></li>
+                {% if app.user.roles[0]=='ROLE_SUPER_ADMIN' or app.user.roles[0]=='SERVICECLIENT' or app.user.roles[0]=='CHEFSERVICECLI'  %}
+
+                <li><a href="#messagesContent" class="sidebar">Messages
+
+                        <div class="notifyCircle red">{{ cntcmt }}</div>
+                        <i class="icon-chevron-sign-right"></i></a></li>
+{% endif %}
+                <li><a href="#profileContent" class="sidebar">{{ app.user.name }}<i class="icon-chevron-sign-right"></i></a>
+                </li>
+                <li class="sublevel"><a href="{{ path('update_profile_users') }}">Modifier mon profile<i class="icon-user"></i></a></li>
+
+                <li class="sublevel"><a href="{{ path('fos_user_security_logout') }}">Déconnexion<i class="icon-off"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- ==================== END OF SIDEBAR COLLAPSED ==================== -->
+    <!-- ==================== SIDEBAR TASKS ==================== -->
+
+
+    <!-- ==================== SIDEBAR NOTIFICATIONS ==================== -->
+    <div id="notificationsContent">
+        <div class="sidebarDivider"></div>
+        <div class="sidebarContent">
+            <a href="#collapsedSidebarContent" class="showCollapsedSidebarMenu"><i class="icon-chevron-sign-left"></i>
+
+                <h1> Notifications</h1></a>
+
+            <h1>Notifications</h1>
+
+            <div class="sidebarInfo">
+                <div><span class="label orange">{{ notifications|length }}</span> new notifications</div>
+            </div>
+            <ul class="notificationsList">
+                {% for item in notifications %}
+                    {% set time = timeAgo( item.dcr|date('Y-m-d H:i:s') ) %}
+
+                    <li class="{% if item.etat == 0 %} new {% endif %} {% if loop.first %} first {% endif %}">
+
+                        <div>
+                            {% if item.lien %}<a class="hover" style="color: #616161 "
+                                                 href="{{ item.lien }}?notif={{ item.id }}">
+                                <i class="{{ item.icone }}"></i> {{ item.name }}</a>
+                            {% else %}
+                                <i class="{{ item.icone }}"></i> {{ item.name }}
+                            {% endif %}
+                        </div>
+                        <span class="notificationDate">{{ time }} {% if item.etat == 0 %}<span
+                                    class="pull-right notificationStatus">new</span>{% endif %}</span>
+                    </li>
+                {% endfor %}
+
+            </ul>
+            <form method="get" action="{{ path('back_notification') }}">
+                <button class="btn btn-primary">Voir tous</button>
+
+            </form>
+        </div>
+    </div>
+    <!-- ==================== END OF SIDEBAR NOTIFICATIONS ==================== -->
+
+    <!-- ==================== SIDEBAR MESSAGES ==================== -->
+    {{  render(controller('BackDealBundle:Comment:messagebar'))  }}
+
+    <!-- ==================== END OF SIDEBAR MESSAGES ==================== -->
+
+
+
+    <!-- ==================== SIDEBAR PROFILE ==================== -->
+    <div id="profileContent">
+        <div class="sidebarDivider"></div>
+        <div class="sidebarContent">
+            <a href="#collapsedSidebarContent" class="showCollapsedSidebarMenu"><i class="icon-chevron-sign-left"></i>
+
+                <h1> Mon Compte</h1></a>
+
+            <h1>Mon Compte</h1>
+{% set userPhoto =  'uploads/user/' ~ app.user.profilePicturePath %}
+           <div class="profileBlock">
+                <div class="profilePhoto"
+                     {% if app.user.profilePicturePath!='' %}style="background: url('{{ asset(userPhoto| imagine_filter('user_profil')) }}') no-repeat center top"{% endif %}>
+
+                    <div class="usernameHolder">{{ app.user.name }}</div>
+
+                </div>
+                <div class="profileInfo">
+
+                    <p><i class="icon-envelope-alt"></i> {{ app.user.email }}</p>
+
+                    <p><i class="icon-globe"></i> Yasmine Press</p>
+
+                </div>
+                <footer>
+                    <div class="profileSettingBlock editProfile"
+                         onclick="$(location).attr('href','{{ path('update_profile_users') }}');"><i
+                                class="icon-user"></i>Modifier le profil
+                    </div>
+                    <!--div class="profileSettingBlock changePassword"><i class="icon-lock"></i>change password</div-->
+                    <div class="profileSettingBlock logout"
+                         onclick="$(location).attr('href','{{ path('fos_user_security_logout') }}');"><i
+                                class="icon-off"></i>Déconnexion
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!-- ==================== END OF SIDEBAR PROFILE ==================== -->
+
+</div>
+<!-- ==================== END OF SIDEBAR ==================== -->
+
+{% if app.user.roles[0]=='ROLE_SUPER_ADMIN' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+{% elseif app.user.roles[0]=='COMMERCIAL' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainCommercialMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+{% elseif app.user.roles[0]=='PALAINER' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainPalainerMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+{% elseif app.user.roles[0]=='CAISSIER' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainCaissierMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+{% elseif app.user.roles[0]=='RESPONSABLECAISSE' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainResponsableCaisseMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+{% elseif app.user.roles[0]=='FINANCIER' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainFinancierMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+{% elseif app.user.roles[0]=='SERVICECLIENT' or app.user.roles[0]=='CHEFSERVICECLI' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainServiceClientMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+{% elseif app.user.roles[0]=='PARTENAIRE' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainPartnerMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+{% elseif app.user.roles[0]=='REDACTEUR' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainRedacctorMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+
+
+
+{% elseif app.user.roles[0]=='DAF' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainDafMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+{% elseif app.user.roles[0]=='DIRECTEURCOMMERCIAL' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainDcMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+{% elseif app.user.roles[0]=='CHEFRED' %}
+    <div class="mainmenu">
+        <div class="container-fluid">
+            {{ knp_menu_render('BackDashBundle:Builder:createMainChefRedacctorMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+        </div>
+    </div>
+{% endif %}
+<div class="content1">
+    <!-- ==================== TITLE LINE FOR HEADLINE ==================== -->
+    <div class="titleLine">
+        <!--div class="container-fluid">
+            <div class="titleIcon"><i class="icon-dashboard"></i></div>
+            <ul class="titleLineHeading">
+                <li class="heading"><h1>Dashboard</h1></li>
+                <li class="subheading">the place for everything</li>
+            </ul>
+            <ul class="titleLineCharts pull-right">
+                <li>
+                    <span class="usersBar">100,235,549,222,639,335,800</span>
+                    <h2 class="cyanText">1254<span class="greyText">users</span></h2>
+                </li>
+                ...
+            </ul>
+        </div-->
+    </div>
+    <!-- ==================== END OF TITLE LINE ==================== -->
+    <!-- ==================== BREADCRUMBS / DATETIME ==================== -->
+    <ul class="breadcrumb">
+        {{ wo_render_breadcrumbs({ viewTemplate: "::breadcrumbs.html.twig" })|raw }}
+        <!--<li><i class="icon-home"></i><a href="{{ path('back_dash_homepage') }}"> Home</a> <span class="divider"><i class="icon-angle-right"></i></span></li>
+                <li class="active">Dashboard</li>
+                <li class="moveDown pull-right">
+                    <span class="time"></span>
+                    <span class="date"></span>
+                </li>   -->
+    </ul>
+    {% block body %}
+    
+	
+    {% endblock %}
+
+
+    <!-- ==================== END OF BREADCRUMBS / DATETIME ==================== -->
+    
+</div>
+<div class="col-md-12 text-center form-signin-footer">
+	<strong>Yasmine Press © {{ 'now'|date('Y') }}</strong>
+</div>
+
+<script src="{{ asset('RessourcesBack/js/jquery-1.10.1.min.js') }}"></script>
+<script>window.jQuery || document.write('<script src="{{ asset('js/jquery-1.10.1.min.js') }}"><\/script>')</script>
+<script src="{{ asset('RessourcesBack/js/vendor/bootstrap-slider.js') }}"></script>
+<!-- bootstrap slider plugin -->
+<script src="{{ asset('RessourcesBack/js/vendor/jquery.sparkline.min.js') }}"></script>
+<!-- small charts plugin -->
+<script src="{{ asset('RessourcesBack/js/vendor/bootstrap-multiselect.js') }}"></script>
+<!-- multiselect plugin -->
+<script src="{{ asset('RessourcesBack/js/vendor/parsley.min.js') }}"></script>
+<!-- parsley validator plugin -->
+
+<script src="{{ asset('RessourcesBack/js/vendor/bootstrap.min.js') }}"></script>
+<script src="{{ asset('RessourcesBack/js/thekamarel.js') }}"></script>
+<!-- main project js file -->
+<script src="{{ asset('RessourcesBack/js/jquery.fancybox.js') }}"></script>
+<!-- bootbox -->
+<script src="{{ asset('RessourcesBack/js/lib/bootbox/bootbox.min.js') }}"></script>
+{% javascripts '@BackPlanningBundle/Resources/public/js/jquery.form-validator.js' %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script>
+
+    $(function () {
+
+        $('#multipleSelect').multiselect({
+            buttonText: function (options, select) {
+                if (options.length == 0) {
+                    return 'None selected <b class="caret"></b>';
+                }
+                else if (options.length > 1) {
+                    return options.length + ' selected <b class="caret"></b>';
+                }
+                else {
+                    var selected = '';
+                    options.each(function () {
+                        selected += $(this).text() + ', ';
+                    });
+                    return selected.substr(0, selected.length - 2) + ' <b class="caret"></b>';
+                }
+            }
+        });
+
+        $('#secondForm').parsley({
+            excluded: 'ul.dropdown-menu li input[type=checkbox]'
+        });
+        $('.iframe-btnx').fancybox({
+            'width': 880,
+            'height': 570,
+            'type': 'iframe',
+            'autoScale': false
+        });
+    });
+
+</script>
+{% block javascripts %}
+{% endblock %}
+</body>
+</html>

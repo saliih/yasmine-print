@@ -1,0 +1,102 @@
+{% extends '::baseBack.html.twig' %}
+{% form_theme form 'form_table_layout.html.twig' %}
+{% block body -%}
+    <div class="content">
+        <div class="container-fluid">
+
+            <!-- ==================== COMMON ELEMENTS ROW ==================== -->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- ==================== TEXT INPUTS HEADLINE ==================== -->
+                    <div class="containerHeadline">
+                        <i class="icon-edit"></i>
+
+                        <h2>Ajouter / Modifier un utilisateur</h2>
+
+                        <div class="controlButton pull-right"><i class="icon-remove removeElement"></i></div>
+                        <div class="controlButton pull-right"><i class="icon-caret-down minimizeElement"></i></div>
+                    </div>
+                    <!-- ==================== END OF TEXT INPUTS HEADLINE ==================== -->
+
+                    <!-- ==================== TEXT INPUTS FLOATING BOX ==================== -->
+                    <div class="floatingBox">
+                        <div class="container-fluid">
+
+                            <div class="container-fluid">
+                                {{ form_start(form, {'method': 'POST','attr': {'class': 'form-horizontal contentForm'}}) }}
+                                {{ form_row(form.name, { 'attr': {'class': 'span10'} }) }}
+                                {{ form_row(form.email, { 'attr': {'class': 'span10'} }) }}
+                                {{ form_row(form.username, { 'attr': {'class': 'span10'} }) }}
+                                {{ form_row(form.plainPassword, { 'attr': {'class': 'span10'} }) }}
+                                {{ form_row(form.roles, { 'attr': {'class': 'span10'} }) }}
+                                {{ form_row(form.enabled, { 'attr': {'class': 'span3 '} }) }}
+                                {{ form_row(form.profilePictureFile, { 'attr': {'class': 'span3 '} }) }}
+
+
+                                <div class="formFooter">
+                                    <button type="submit" class="btn btn-success"><i class="icon-ok"> </i>
+                                        Valider
+                                    </button>
+                                    <button type="reset" class="btn btn-danger"><i class="icon-remove"> </i>
+                                        Effacer
+                                    </button>
+                                    <a href="{{ path('show_users') }}">
+                                        <button class="btn btn-inverse" type="button"><i class="icon-list"></i>
+                                            Liste
+                                        </button>
+                                    </a>
+                                    {{ form_row(form._token) }}
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ==================== END OF TEXT INPUTS FLOATING BOX ==================== -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('RessourcesBack/js/vendor/jquery.form-validator.js') }}"></script>
+    <script>
+        $(function () {
+            $('#fos_user_registration_form_roles').multiselect({
+                buttonText: function (options, select) {
+                    if (options.length == 0) {
+                        return 'None selected <b class="caret"></b>';
+                    }
+                    else if (options.length > 1) {
+                        return options.length + ' selected <b class="caret"></b>';
+                    }
+                    else {
+                        var selected = '';
+                        options.each(function () {
+                            selected += $(this).text() + ', ';
+                        });
+                        return selected.substr(0, selected.length - 2) + ' <b class="caret"></b>';
+                    }
+                }
+            });
+        });
+		$(document).ready(function () {
+            $("#fos_user_registration_form_name").attr({
+                'data-validation': 'required'
+            });
+            $("#fos_user_registration_form_email").attr('data-validation', 'email');
+            $("#fos_user_registration_form_plainPassword_first").attr({
+                'data-validation': 'length',
+                'data-validation-length': 'min8'
+            });
+            $("#fos_user_registration_form_plainPassword_second").attr({
+                'data-validation': 'confirmation',
+                'data-validation-confirm':'fos_user_registration_form[plainPassword][first]'
+            });
+             $.validate();
+        });
+    </script>
+{% endblock %}
+{% block stylesheets %}
+{% endblock %}

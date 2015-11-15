@@ -1,0 +1,415 @@
+@import url('bootstrap.min.css');                   /* bootstrap css */
+@import url('font-awesome.min.css');                /* font awesome css */
+@import url('slider.css');                          /* bootstrap slider css */
+@import url('toggle-switch.css');                   /* toggler switch css */
+@import url('bootstrap-wysihtml5-0.0.2.css');       /* bootstrap wysiwyg css */
+@import url('theme.default.css');                   /* tablesorter css */
+@import url('bootstrap-editable.css');              /* bootstrap editable fields css */
+@import url('jquery.selectBoxIt.css');              /* selectBoxIt plugin css */
+@import url('colorpicker.css');             		/* colorpicker plugin css */
+@import url('datepicker.css');              		/* datepicker plugin css */
+@import url('jquery.jgrowl.min.css');              	/* jgrowl plugin css */
+@import url('bootstrap-tags.css');              	/* bootstrap tags css */
+@import url('colorbox.css');              			/* colorbox css */
+@import url('jquery-jvectormap-1.2.2.css');         /* vector maps plugin css */
+@import url('thekamarel.css');                      /* main project css */
+@import url('thekamarel-responsive.css');           /* main responsive project css */
+
+/* Custom Styles */
+/* Alerts */
+.alert {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+.alert-danger, .alert-error {
+  color: #e2007a;
+  background-color: #f6b7cc;
+  border-color: #e2007a;
+  border-radius: 0;
+}
+.redText {
+  color: #DE0E79;
+}
+body {
+  background: #dde6e9;
+}
+.content {
+  color: #000;
+}
+.titleLine {
+  background: #dde6e9;
+}
+.navbar-inverse .navbar-inner {
+  background: #ffffff;
+  border-top: 3px solid #DE0E79;
+}
+.navbar-inverse .input-append .add-on-mini {
+	border: none;
+}
+.navbar-inverse .input-append .add-on-mini:hover, .navbar-inverse .input-append .add-on-mini:focus {
+	background: none;
+	outline: 0;
+}
+.navbar-inverse .input-append .add-on-dark:hover i, .navbar-inverse .input-append .add-on-dark:focus i {
+  color: #DE0E79;
+  background: none;
+}
+.input-append .add-on-dark:hover, .input-append .add-on-dark.active, .input-append .btn-group .btn-dark:hover {
+  color: #DE0E79;
+  border: none;
+  background: none;
+}
+.navbar-inverse .brand img {
+	max-width: 54%;
+}
+.input-append .add-on-dark, .input-append .btn-group .btn-dark {
+  background: none;
+}
+.input-append .add-on-dark i {
+  color: #000;
+  text-shadow: none;
+  font-size: 16px;
+}
+.input-append .add-on-mini#profile {
+  font-size: 13px;
+  text-shadow: none;
+}
+.input-append .add-on-mini#profile span.username {
+	
+}
+.navbar-inverse .input-append .collapsibleContent a.sidebar {
+	margin-left: 20px;
+	border: none;
+}
+div.mainmenu {
+  margin-top: 5px;
+}
+.input-append .add-on-mini#profile {
+	color: #000;
+}
+.input-append .add-on-mini#profile:hover {
+	color: #DE0E79;
+}
+.mainmenu ul.nav, .mainmenu ul.nav ul.dropdown-menu {
+  background: #000000;
+}
+.mainmenu ul.nav li.divider-vertical {
+  background: #d5d5d5;
+}
+.mainmenu ul.nav li.active > a, .mainmenu ul.nav li:hover > a {
+  color: #DE0E79;
+}
+.mainmenu ul.nav li.active, .mainmenu ul.nav li.active:hover, .mainmenu ul.nav li.active:focus, .mainmenu ul.nav li.active > a:focus, .label-pressed {
+  background: none;
+}
+.red, span.label.banned {
+  background-color: #de0e79;
+}
+ul.notificationsList li:hover, ul.settingsList li, div.fontSizeBlock:hover, div.fontStyleBlock:hover, div.fontSizeBlock.active, div.fontStyleBlock.active, ul.titleLineOnRight li, .tabContainer .nav-tabs>.active>a, .wysihtml5-sandbox, div.mf_container, #tooltip, .containerHeadline, .fc-button.fc-state-default, table.gradientHeader thead th, .gradient {
+  background: #fff;
+}
+ul.titleLineOnRight li {
+	border-radius: 0;
+}
+.containerHeadline {
+  border-top: 3px solid #DE0E79;
+  padding: 13px 10px 11px;
+  border-bottom: 3px solid #dde6e9;
+}
+.containerHeadline h2, .containerHeadline i {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+}
+.controlButton i, .containerHeadline .controlButton i, .tabContainer .controlButton i {
+  color: #000;
+  font-size: 14px;
+}
+div.tabContainer {
+  background-color: #FFFFFF;
+  border-radius: 0;
+}
+.tabContainer .nav {
+  background-color: #fff;
+  padding: 9px 0 0 0;
+}
+.nav-tabs {
+  border-bottom: 1px solid #dde6e9;
+}
+.nav-tabs>li {
+  margin-bottom: -2px;
+}
+.tabContainer .nav-tabs>li>a {
+  padding: 8px;
+}
+.tabContainer .nav-tabs>.active>a {
+  border-bottom: 0;
+}
+.pr-10 {
+	padding-right: 10px;
+}
+.marg-bottom-40 {
+	margin-bottom: 20px;
+}
+/* Breadcrumb */
+.breadcrumb {
+  background-color: #ffffff;
+  padding: 4px 20px;
+  font-size: 13px;
+}
+/* Login */
+.brand-form-signin img {
+	margin-bottom: -22em;
+}
+.form-signin-footer {
+  background: #ffffff;
+  border-top: 3px solid #DE0E79;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  z-index: 99;
+ }
+#login-validate .btn {
+  background: none;
+  border: none;
+  padding: 0;
+}
+.external-event {
+	padding: 2px;
+}
+.external-event input[type=checkbox].css-checkbox + .css-label {
+	padding-left: 16px;
+	width: 90%;
+}
+.external-event input[type=checkbox].css-checkbox + .css-label span {
+	display: inline-block;
+	width: 120px;
+}
+.external-event input[type=checkbox].css-checkbox + .css-label a i {
+	font-size: 16px;
+}
+
+.table-bordered th, .table-bordered td {
+  border-left: none;
+}
+/*Voir Ticket / Ticket detail */
+.voir-ticket .floatingBox form.form-horizontal {
+	margin-top: 0;	
+}
+.voir-ticket .floatingBox .row-fluid {
+	margin-bottom: 0;	
+}
+.headline {
+  display: block;
+  margin: 10px 0 12px 0;
+  border-bottom: 2px dotted #e4e9f0;
+}
+.headline h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 -3px 0;
+  padding-bottom: 2px;
+  display: inline-block;
+  /*border-bottom: 4px solid #e2007a;*/
+}
+
+/* Répondre Ticket */
+#show {
+	width: 106px;
+	text-align: left;
+}
+#show i {
+	color: #FFFFFF;
+	margin: 0;
+	vertical-align: middle;
+	line-height: 19px;
+}
+.btn-danger:active, .btn-danger.active {
+	  background: #df068c;
+	  color: #FFFFFF;
+}
+/* Messages in tickets */
+.panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+.panel-body {
+  padding:31px 15px;
+}
+.teal, .teal:hover, .teal:focus {
+    color: #de0e79;
+    text-decoration: none;
+}
+.panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.panel-heading > .dropdown .dropdown-toggle {
+  color: inherit;
+}
+.panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: inherit;
+}
+.panel-title > a,
+.panel-title > small,
+.panel-title > .small,
+.panel-title > small > a,
+.panel-title > .small > a {
+  color: inherit;
+}
+.panel-footer {
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.panel-default {
+  border-color: #ddd;
+}
+.panel-default > .panel-heading {
+  color: #333;
+  background-color: #f5f5f5;
+  border-color: #ddd;
+}
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #ddd;
+}
+.panel-default > .panel-heading .badge {
+  color: #f5f5f5;
+  background-color: #333;
+}
+.panel-default > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #ddd;
+}
+
+.comment-list .span9 {
+  position: relative;
+}
+.comment-list .panel .panel-heading {
+  padding: 4px 15px;
+  position: absolute;
+  border:none;
+  border-top-right-radius:0px;
+  top: 1px;
+}
+.comment-list .panel .panel-heading.right {
+  border-right-width: 0px;
+  border-top-left-radius:0px;
+  right: 16px;
+}
+.comment-list .panel .panel-heading .panel-body {
+  padding-top: 6px;
+}
+.comment-list figcaption {
+  word-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .comment-list .arrow:after, .comment-list .arrow:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+  }
+  .comment-list .panel.arrow.left:after, .comment-list .panel.arrow.left:before {
+    border-left: 0;
+  }
+  /*Outline effect style*/
+  .comment-list .panel.arrow.left:before {
+    left: -16px;
+    top: 16px;
+    border-right-color: inherit;
+    border-width: 16px;
+  }
+  .comment-list .panel.arrow.left:after {
+   left: -14px;
+    top: 17px;
+    border-right-color: #FFFFFF;
+    border-width: 15px;
+  }
+  /*Outline effect style*/
+  .comment-list .panel.arrow.right:before {
+    right: -31px;
+    top: 16px;
+    border-left-color: inherit;
+    border-width: 16px;
+  }
+  .comment-list .panel.arrow.right:after {
+    right: -29px;
+    top: 17px;
+    border-left-color: #FFFFFF;
+    border-width: 15px;
+  }
+}
+.comment-list .comment-post {
+  margin-top: 6px;
+}
+.comment-list .comment-post p {
+    margin-bottom: 20px;
+  	line-height: 20px;
+}
+.bootstrap-select.btn-group:not(.input-group-btn) {
+	margin-bottom: 10px !important;
+}
+.marg-bottom-40 #remboursement {
+	float: left;
+}
+.marg-bottom-40 strong {
+	display: block;
+}
+.marg-bottom-40 table {
+	padding: 10px 0;
+  	display: block;
+  	background: #f7f7f7;
+  	border: 1px solid #ccc;
+  	margin: 14px 0 30px 0;
+}
+.marg-bottom-40 table label {
+	font-weight: bold;
+	color: #DE0E79;
+	font-size: 14px;
+}
+#back_partnerbundle_invoice_coupon {
+	border-left: 2px solid #eee;
+}
+
+body.validationForm .form-horizontal .control-group.has-error {
+	position: relative;
+}
+body.validationForm .form-horizontal .control-group.has-error ul {
+	position: absolute;
+    bottom: 0;
+    margin: 0;
+    list-style: none;
+    color: red;
+    left: 15%;
+}
+#newEventForm input, #newEventForm textarea, #newEventForm select {
+	font-style: italic;
+    font-size: 13px;
+}
+.fc-event, .fc-event:hover, .fc-event:focus {
+	color: #ffffff;
+}
+/* Responsivness */
+@media (max-width: 375px) {
+	.navbar .brand {
+		width: 94%;
+	}
+}

@@ -1,0 +1,42 @@
+{% extends '::login.html.twig' %}
+{% block body %}
+{% if app.user  and app.user.roles[0]!='ROLE_CLIENT' %}
+<script>
+
+    window.location.href = "{{ path('back_dash_homepage') }}"</script>
+{% else %}
+
+	<div class="col-md-12 text-center">
+	    <a class="navbar-brand brand-form-signin" href="{{ path('fos_user_security_login') }}"><img src="{{ asset('RessourcesBack/img/logo.png') }}" alt="Yasmine Press" class="img-responsive" /></a>
+	</div>
+    <form id="login-validate" name="loginform" action="{{ path('fos_user_security_check') }}" class="form-signin" method="post">
+        <h2 class="form-signin-heading"><strong>Administration </strong>Yasmine Press</h2>
+
+        {% trans_default_domain 'FOSUserBundle' %}
+        {% if error %}
+            <div class="alert alert-error">{{ error.message|trans({'Bad credentials': 'Login ou mot de passe incorrect'}) }}</div>
+        {% endif %}
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-user"></i></span>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username">
+        </div>
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-lock"></i></span>
+            <input type="password" id="password" name="_password" value="">
+			<!--
+            <a href="javascript:$('#login-validate').submit()"><span  class="add-on" id="login"><i class="icon-arrow-right"></i></span></a>
+            -->
+            
+            <button type="submit" class="btn" ><span  class="add-on" id="login"><i class="icon-arrow-right"></i></span></button>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+        </div>
+
+
+    </form>
+	<div class="col-md-12 text-center form-signin-footer">
+	    <strong>Yasmine Press © {{ 'now'|date('Y') }}</strong>
+	</div>
+
+
+{% endif %}
+{% endblock %}
