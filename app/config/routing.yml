@@ -1,6 +1,6 @@
 main_back:
     resource: "@MainBackBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /Manager
 
 user_user:
     resource: "@UserUserBundle/Resources/config/routing.yml"
