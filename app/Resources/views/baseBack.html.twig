@@ -36,34 +36,8 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <a class="brand" href="{{ path('back_dash_homepage') }}"><img class="img-responsive" src="{{ asset('RessourcesBack/img/logo.png') }}"> </a>
+            <a class="brand" href="{{ path('main_back_homepage') }}"><img class="img-responsive" src="{{ asset('public/images/logo.png--') }}"> </a>
 
-            <div class="nav pull-right">
-                <form class="navbar-form">
-                    <div class="input-append">
-                        <div class="collapsibleContent">
-
-                            <a href="#notificationsContent" class="sidebar"><span
-                                        class="add-on add-on-middle add-on-mini add-on-dark" id="notifications"><i
-                                            class="icon-bell-alt"></i><span
-                                            class="notifyCircle orange">{{ notifications|length }}</span></span></a>
-                            {% set cntcmt=render(controller('BackDealBundle:Comment:countcomment')) %}
-                            {% if app.user.roles[0]=='ROLE_SUPER_ADMIN' or app.user.roles[0]=='SERVICECLIENT' or app.user.roles[0]=='CHEFSERVICECLI'  %}
-
-                            <a href="#messagesContent" class="sidebar"><span
-                                        class="add-on add-on-middle add-on-mini add-on-dark" id="messages"><i
-                                            class="icon-comments-alt"></i>{% if cntcmt>0 %}<span
-                                            class="notifyCircle red">{{ cntcmt }}</span>{% endif %}</span></a>
-                            {% endif %}
-                            <a href="#profileContent" class="sidebar"><span class="add-on add-on-mini add-on-dark"
-                                                                            id="profile"><i class="icon-user"></i><span
-                                            class="username">{{ app.user.name }}</span></span></a>
-                        </div>
-                        <a href="#collapsedSidebarContent" class="collapseHolder sidebar"><span
-                                    class="add-on add-on-mini add-on-dark"><i class="icon-sort-down"></i></span></a>
-                    </div>
-                </form>
-            </div>
             <!--/.nav-collapse -->
         </div>
     </div>
@@ -73,76 +47,14 @@
 <!-- ==================== SIDEBAR ==================== -->
 <div class="hiddenContent">
     <!-- ==================== SIDEBAR COLLAPSED ==================== -->
-    <div id="collapsedSidebarContent">
-        <div class="sidebarDivider"></div>
-        <div class="sidebarContent">
-            <ul class="collapsedSidebarMenu">
 
-                <li><a href="#notificationsContent" class="sidebar">Notifications
-                        <div class="notifyCircle orange">{{ notifications|length }}</div>
-                        <i class="icon-chevron-sign-right"></i></a></li>
-                {% if app.user.roles[0]=='ROLE_SUPER_ADMIN' or app.user.roles[0]=='SERVICECLIENT' or app.user.roles[0]=='CHEFSERVICECLI'  %}
-
-                <li><a href="#messagesContent" class="sidebar">Messages
-
-                        <div class="notifyCircle red">{{ cntcmt }}</div>
-                        <i class="icon-chevron-sign-right"></i></a></li>
-{% endif %}
-                <li><a href="#profileContent" class="sidebar">{{ app.user.name }}<i class="icon-chevron-sign-right"></i></a>
-                </li>
-                <li class="sublevel"><a href="{{ path('update_profile_users') }}">Modifier mon profile<i class="icon-user"></i></a></li>
-
-                <li class="sublevel"><a href="{{ path('fos_user_security_logout') }}">Déconnexion<i class="icon-off"></i></a></li>
-            </ul>
-        </div>
-    </div>
     <!-- ==================== END OF SIDEBAR COLLAPSED ==================== -->
     <!-- ==================== SIDEBAR TASKS ==================== -->
 
 
     <!-- ==================== SIDEBAR NOTIFICATIONS ==================== -->
-    <div id="notificationsContent">
-        <div class="sidebarDivider"></div>
-        <div class="sidebarContent">
-            <a href="#collapsedSidebarContent" class="showCollapsedSidebarMenu"><i class="icon-chevron-sign-left"></i>
-
-                <h1> Notifications</h1></a>
-
-            <h1>Notifications</h1>
-
-            <div class="sidebarInfo">
-                <div><span class="label orange">{{ notifications|length }}</span> new notifications</div>
-            </div>
-            <ul class="notificationsList">
-                {% for item in notifications %}
-                    {% set time = timeAgo( item.dcr|date('Y-m-d H:i:s') ) %}
-
-                    <li class="{% if item.etat == 0 %} new {% endif %} {% if loop.first %} first {% endif %}">
-
-                        <div>
-                            {% if item.lien %}<a class="hover" style="color: #616161 "
-                                                 href="{{ item.lien }}?notif={{ item.id }}">
-                                <i class="{{ item.icone }}"></i> {{ item.name }}</a>
-                            {% else %}
-                                <i class="{{ item.icone }}"></i> {{ item.name }}
-                            {% endif %}
-                        </div>
-                        <span class="notificationDate">{{ time }} {% if item.etat == 0 %}<span
-                                    class="pull-right notificationStatus">new</span>{% endif %}</span>
-                    </li>
-                {% endfor %}
-
-            </ul>
-            <form method="get" action="{{ path('back_notification') }}">
-                <button class="btn btn-primary">Voir tous</button>
-
-            </form>
-        </div>
-    </div>
-    <!-- ==================== END OF SIDEBAR NOTIFICATIONS ==================== -->
 
     <!-- ==================== SIDEBAR MESSAGES ==================== -->
-    {{  render(controller('BackDealBundle:Comment:messagebar'))  }}
 
     <!-- ==================== END OF SIDEBAR MESSAGES ==================== -->
 
@@ -157,10 +69,9 @@
                 <h1> Mon Compte</h1></a>
 
             <h1>Mon Compte</h1>
-{% set userPhoto =  'uploads/user/' ~ app.user.profilePicturePath %}
+
            <div class="profileBlock">
                 <div class="profilePhoto"
-                     {% if app.user.profilePicturePath!='' %}style="background: url('{{ asset(userPhoto| imagine_filter('user_profil')) }}') no-repeat center top"{% endif %}>
 
                     <div class="usernameHolder">{{ app.user.name }}</div>
 
@@ -191,82 +102,13 @@
 </div>
 <!-- ==================== END OF SIDEBAR ==================== -->
 
-{% if app.user.roles[0]=='ROLE_SUPER_ADMIN' %}
+
     <div class="mainmenu">
         <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
-        </div>
-    </div>
-{% elseif app.user.roles[0]=='COMMERCIAL' %}
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainCommercialMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
-        </div>
-    </div>
-{% elseif app.user.roles[0]=='PALAINER' %}
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainPalainerMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
-        </div>
-    </div>
-{% elseif app.user.roles[0]=='CAISSIER' %}
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainCaissierMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
-        </div>
-    </div>
-{% elseif app.user.roles[0]=='RESPONSABLECAISSE' %}
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainResponsableCaisseMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
-        </div>
-    </div>
-{% elseif app.user.roles[0]=='FINANCIER' %}
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainFinancierMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
-        </div>
-    </div>
-{% elseif app.user.roles[0]=='SERVICECLIENT' or app.user.roles[0]=='CHEFSERVICECLI' %}
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainServiceClientMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
-        </div>
-    </div>
-{% elseif app.user.roles[0]=='PARTENAIRE' %}
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainPartnerMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
-        </div>
-    </div>
-{% elseif app.user.roles[0]=='REDACTEUR' %}
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainRedacctorMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
+            {{ knp_menu_render('MainBackBundle:Builder:createMainMenu', {'template': 'MainBackBundle:Menu:knp_menu.html.twig'}) }}
         </div>
     </div>
 
-
-
-{% elseif app.user.roles[0]=='DAF' %}
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainDafMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
-        </div>
-    </div>
-{% elseif app.user.roles[0]=='DIRECTEURCOMMERCIAL' %}
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainDcMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
-        </div>
-    </div>
-{% elseif app.user.roles[0]=='CHEFRED' %}
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('BackDashBundle:Builder:createMainChefRedacctorMenu', {'template': 'BackDashBundle:Menu:knp_menu.html.twig'}) }}
-        </div>
-    </div>
-{% endif %}
 <div class="content1">
     <!-- ==================== TITLE LINE FOR HEADLINE ==================== -->
     <div class="titleLine">
@@ -289,12 +131,7 @@
     <!-- ==================== BREADCRUMBS / DATETIME ==================== -->
     <ul class="breadcrumb">
         {{ wo_render_breadcrumbs({ viewTemplate: "::breadcrumbs.html.twig" })|raw }}
-        <!--<li><i class="icon-home"></i><a href="{{ path('back_dash_homepage') }}"> Home</a> <span class="divider"><i class="icon-angle-right"></i></span></li>
-                <li class="active">Dashboard</li>
-                <li class="moveDown pull-right">
-                    <span class="time"></span>
-                    <span class="date"></span>
-                </li>   -->
+
     </ul>
     {% block body %}
     
@@ -326,9 +163,7 @@
 <script src="{{ asset('RessourcesBack/js/jquery.fancybox.js') }}"></script>
 <!-- bootbox -->
 <script src="{{ asset('RessourcesBack/js/lib/bootbox/bootbox.min.js') }}"></script>
-{% javascripts '@BackPlanningBundle/Resources/public/js/jquery.form-validator.js' %}
-<script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
+<script type="text/javascript" src="{{ asset('public/js/jquery.form-validator.js') }}"></script>
 <script>
 
     $(function () {

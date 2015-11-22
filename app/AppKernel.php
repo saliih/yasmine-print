@@ -19,7 +19,9 @@ class AppKernel extends Kernel
             new Main\BackBundle\MainBackBundle(),
             new User\UserBundle\UserUserBundle(),
 
-
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\UserBundle\FOSUserBundle(),
         );
 

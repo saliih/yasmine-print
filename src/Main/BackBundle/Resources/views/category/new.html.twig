@@ -1,0 +1,38 @@
+{% extends '::baseBack.html.twig' %}
+{% block body -%}
+    <div class="content">
+        <div class="container-fluid">
+            <a href="{{ path('dash_category') }}"><button class="btn btn-inverse pull-right" type="button"><i class="icon-list"></i> Liste</button></a>
+            <!-- ==================== COMMON ELEMENTS ROW ==================== -->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- ==================== TEXT INPUTS HEADLINE ==================== -->
+                    <div class="containerHeadline">
+                        <i class="icon-edit"></i><h2>Ajouter une catégorie</h2>
+                    </div>
+                    <!-- ==================== END OF TEXT INPUTS HEADLINE ==================== -->
+                    <!-- ==================== TEXT INPUTS FLOATING BOX ==================== -->
+                    <div class="floatingBox">
+                        <div class="container-fluid">
+                            <form class="form-horizontal contentForm" method="POST" action="{{path('dash_category_create')}}">
+                                <div class="control-group">
+                                    <label class="control-label">Nom</label>
+                                    <div class="controls">
+                                        {{ form_widget(form.name) }}
+                                    </div>
+                                </div>
+                                <div class="formFooter">
+                                    <button type="submit" class="btn btn-success"><i class="icon-ok"> </i> Valider</button>
+                                    <button type="reset" class="btn btn-danger"><i class="icon-remove"> </i> Effacer</button>
+
+                                    {{ form_widget(form._token) }}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- ==================== END OF TEXT INPUTS FLOATING BOX ==================== -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

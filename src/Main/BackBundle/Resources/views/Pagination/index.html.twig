@@ -1,0 +1,73 @@
+{% extends '::baseBack.html.twig' %}
+{% block body -%}
+    <!-- ==================== PAGE CONTENT ==================== -->
+    <div class="content">
+
+        <!-- ==================== WIDGETS CONTAINER ==================== -->
+        <div class="container-fluid">
+
+
+            <!-- ==================== END OF ROW ==================== -->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- ==================== DEFAULT TABLE HEADLINE ==================== -->
+                    <div class="containerHeadline">
+                        <i class="icon-table"></i>
+
+                        <h2>Big Fid</h2>
+                    </div>
+                    <!-- ==================== END OF DEFAULT TABLE HEADLINE ==================== -->
+
+                    <!-- ==================== DEFAULT TABLE FLOATING BOX ==================== -->
+                    <div class="floatingBox table">
+                        <div class="container-fluid">
+                            <table class="table">
+                                <thead>
+                                <tr>
+
+                                    <th>Valeur</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for entity in pagination %}
+                                    <tr>
+
+                                        <td>
+                                            <a href="{{ path('update_parameter_manager', { 'id': entity.id }) }}">{{ entity.valeur }}</a>
+                                        </td>
+
+                                        <td>
+                                            <div class="btn-toolbar" style="margin: 0;">
+                                                <div class="btn-group">
+                                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                                        Action <span
+                                                                class="caret"></span></button>
+                                                    <ul class="dropdown-menu pull-right">
+                                                        <li>
+                                                            <a href="{{ path('update_parameter_manager', { 'id': entity.id }) }}">Modifier</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {# display navigation #}
+                            <div class="pagination pagination-large" style="text-align: center">
+                                {{ knp_pagination_render(pagination) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ==================== END OF WIDGETS CONTAINER ==================== -->
+    </div>
+
+    <!-- ==================== END OF PAGE CONTENT ==================== -->
+{% endblock %}

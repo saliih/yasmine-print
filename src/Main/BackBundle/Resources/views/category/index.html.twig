@@ -1,0 +1,117 @@
+{% extends '::baseBack.html.twig' %}
+{% block body -%}
+    <!-- ==================== PAGE CONTENT ==================== -->
+    <div class="content">
+
+        <!-- ==================== WIDGETS CONTAINER ==================== -->
+        <div class="container-fluid">
+            <a href="{{ path('add_category_manager') }}">
+                <button class="btn btn-danger" type="button">Ajouter</button>
+            </a>
+
+            <!-- ==================== END OF ROW ==================== -->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- ==================== DEFAULT TABLE HEADLINE ==================== -->
+                    <div class="containerHeadline">
+                        <i class="icon-table"></i>
+
+                        <h2>Categories</h2>
+                    </div>
+                    <!-- ==================== END OF DEFAULT TABLE HEADLINE ==================== -->
+
+                    <!-- ==================== DEFAULT TABLE FLOATING BOX ==================== -->
+                    <div class="floatingBox table">
+                        <div class="container-fluid">
+                            <table class="table" id="membersTable">
+                                <thead>
+                                <tr>
+
+                                    <th>&nbsp;</th>
+                                    <th>Nom</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for entity in pagination %}
+                                    <tr>
+                                        <td width="12">
+                                            <div style="background-color: {{ entity.color }} ;  border-radius: 12px;height: 20px;margin-bottom: 1px;margin-left: 3px;margin-top: 1px;width: 20px;"
+                                                 class="roundsubscrib rounddisp"></div>
+                                        </td>
+                                        <td><a href="{{ path('show_category_manager', { 'id': entity.id }) }}">
+                                                {{ entity.name }}</a>
+                                        </td>
+                                        <td>
+                                            <div class="btn-toolbar" style="margin: 0;">
+                                                <div class="btn-group">
+                                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                                        Action <span
+                                                                class="caret"></span></button>
+                                                    <ul class="dropdown-menu pull-right">
+
+
+                                                        <li>
+                                                            <a href="{{ path('update_category_manager', { 'id': entity.id }) }}">Modifier</a>
+                                                        </li>
+
+                                                            <li>
+                                                                <a href="javascript:confirmdeletbox('{{ path('delete_category_manager', {'id': entity.id}) }}')">Supprimer</a>
+                                                            </li>
+
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {# display navigation #}
+                            <div class="pagination pagination-large" style="text-align: center">
+                                {{ knp_pagination_render(pagination) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ==================== END OF WIDGETS CONTAINER ==================== -->
+    </div>
+    {% block javascripts %}
+
+        <script>
+            var editMemberIcon = $('i.edit').parent();
+            var deleteMemberIcon = $('i.delete').parent();
+            var requiredMemberIcon = $('i.required').parent();
+
+            $(requiredMemberIcon).tooltip({
+                title: 'Liste Question'
+            });
+
+            $(editMemberIcon).tooltip({
+                title: 'Edit Categories'
+            });
+
+            $(deleteMemberIcon).tooltip({
+                title: 'Supprimer Categories'
+            });
+
+            $(' i.edit, i.delete').parent().hover(function () {
+                $(this).children().stop().animate({
+                    opacity: 1
+                }, 200);
+            }, function () {
+                $(this).children().stop().animate({
+                    opacity: .7
+                }, 200);
+            });
+
+        </script>
+    {% endblock %}
+    <!-- ==================== END OF PAGE CONTENT ==================== -->
+{% endblock %}

@@ -1,13 +1,9 @@
 {% extends '::login.html.twig' %}
 {% block body %}
-{% if app.user  and app.user.roles[0]!='ROLE_CLIENT' %}
-<script>
 
-    window.location.href = "{{ path('back_dash_homepage') }}"</script>
-{% else %}
 
 	<div class="col-md-12 text-center">
-	    <a class="navbar-brand brand-form-signin" href="{{ path('fos_user_security_login') }}"><img src="{{ asset('RessourcesBack/img/logo.png') }}" alt="Yasmine Press" class="img-responsive" /></a>
+	    <a class="navbar-brand brand-form-signin" href="{{ path('fos_user_security_login') }}"><img src="{{ asset('public/images/logo.png') }}" alt="Yasmine Press" class="img-responsive" /></a>
 	</div>
     <form id="login-validate" name="loginform" action="{{ path('fos_user_security_check') }}" class="form-signin" method="post">
         <h2 class="form-signin-heading"><strong>Administration </strong>Yasmine Press</h2>
@@ -38,5 +34,5 @@
 	</div>
 
 
-{% endif %}
+
 {% endblock %}
