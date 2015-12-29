@@ -15,65 +15,69 @@ class Builder extends ContainerAware
         $em = $this->container->get('doctrine.orm.entity_manager');
         $menu = $factory->createItem('root', array(
                 'childrenAttributes' => array(
-                    'class' => 'nav',
-                    'id' => 'mobile-nav'
+                    'class' => 'main-nav',
+                    //'id' => 'mobile-nav'
                 ),
             )
         );
         //file
-        $menu->addChild('Accueil', array('route' => 'main_back_homepage', 'class' => 'left-side active', 'attributes' => array('class' => 'dropdown', 'id' => 'dashboard')));
-        $menu->addChild('Catégories', array('route' => 'back_category', 'class' => 'left-side active', 'attributes' => array('class' => 'dropdown', 'id' => 'categories')));
-        $menu->addChild('Bannière', array('route' => 'back_banner', 'class' => 'left-side active', 'attributes' => array('class' => 'dropdown', 'id' => 'banner')));
-        $menu->addChild('Pages de contenue', array('route' => 'back_pages', 'class' => 'left-side active', 'attributes' => array('class' => 'dropdown', 'id' => 'banner')));
-        //$menu['Fichier']->addChild('Users', array('route' => 'show_users', 'label' => 'Gestion des utilisateurs'));
+        $menu->addChild('Accueil', array('route' => 'main_back_homepage', 'class' => 'left-side active'));
+        $menu->addChild('Gestion des Produits', array('route' => 'back_category'));
+        $menu['Gestion des Produits']->setLinkAttribute('class', 'dropdown-toggle');
+        $menu['Gestion des Produits']->setLinkAttribute('data-toggle', 'dropdown');
 
-/*
-        $agent = $menu['Gestion des utilisateurs']->addChild('agent', array('label' => 'Agents',
-            'attributes' => array('class' => 'dropdown-submenu', 'id' => 'planning')));
-        $agent->addChild('planner', array('route' => 'list_planner', 'label' => 'Planificateurs'));
-        $agent->addChild('commercial', array('route' => 'list_commercial', 'label' => 'Commerciaux'));
-        $agent->addChild('redacteur', array('route' => 'list_redactor', 'label' => 'Rédacteurs'));
-        $agent->addChild('caissier', array('route' => 'list_caissier', 'label' => 'Caissiers'));
-        $agent->addChild('financier', array('route' => 'list_financier', 'label' => 'Financiers'));
-        $agent->addChild('serviceclient', array('route' => 'list_serviceclient', 'label' => 'Service client'));
-        $responsable = $menu['Gestion des utilisateurs']->addChild('respo', array('label' => 'Responsables',
-            'attributes' => array('class' => 'dropdown-submenu', 'id' => 'planning1')));
-        $responsable->addChild('responsablecaissier', array('route' => 'list_responsablecaissier', 'label' => 'Responsable des Caisses'));
-        $responsable->addChild('chefserviceclient', array('route' => 'list_chefserviceclient', 'label' => 'Chef de service client'));
-        $responsable->addChild('daf', array('route' => 'list_daf', 'label' => 'Directeur administratif et financier'));
-       $responsable->addChild('directeurcommercial', array('route' => 'list_directeurcommercial', 'label' => 'Directeur commercial'));
+        $menu['Gestion des Produits']->addChild('cat', array('route' => 'back_category', 'label' => 'Gestion des catégories'));
 
+        $menu->addChild('Bannière', array('route' => 'back_banner'));
+        $menu->addChild('Pages de contenue', array('route' => 'back_pages'));
 
-
-
-        //$menu['Gestion des Utilisateurs']->addChild('Déconnexion', array('route' => 'fos_user_security_logout', 'label' => 'Déconnexion'));
-        $menu['Gestion des utilisateurs']->setLinkAttribute('class', 'dropdown-toggle');
-        $menu['Gestion des utilisateurs']->setLinkAttribute('data-toggle', 'dropdown');
-
-        //planning
-        $menu->addChild('Service planification', array('uri' => '#', 'class' => 'dropdown-toggle',
-                'attributes' => array('class' => 'dropdown', 'id' => 'planning'))
-        );
-        $menu['Service planification']->setLinkAttribute('class', 'dropdown-toggle');
-        $menu['Service planification']->setLinkAttribute('data-toggle', 'dropdown');
+        /*
+                $agent = $menu['Gestion des utilisateurs']->addChild('agent', array('label' => 'Agents',
+                    'attributes' => array('class' => 'dropdown-submenu', 'id' => 'planning')));
+                $agent->addChild('planner', array('route' => 'list_planner', 'label' => 'Planificateurs'));
+                $agent->addChild('commercial', array('route' => 'list_commercial', 'label' => 'Commerciaux'));
+                $agent->addChild('redacteur', array('route' => 'list_redactor', 'label' => 'Rédacteurs'));
+                $agent->addChild('caissier', array('route' => 'list_caissier', 'label' => 'Caissiers'));
+                $agent->addChild('financier', array('route' => 'list_financier', 'label' => 'Financiers'));
+                $agent->addChild('serviceclient', array('route' => 'list_serviceclient', 'label' => 'Service client'));
+                $responsable = $menu['Gestion des utilisateurs']->addChild('respo', array('label' => 'Responsables',
+                    'attributes' => array('class' => 'dropdown-submenu', 'id' => 'planning1')));
+                $responsable->addChild('responsablecaissier', array('route' => 'list_responsablecaissier', 'label' => 'Responsable des Caisses'));
+                $responsable->addChild('chefserviceclient', array('route' => 'list_chefserviceclient', 'label' => 'Chef de service client'));
+                $responsable->addChild('daf', array('route' => 'list_daf', 'label' => 'Directeur administratif et financier'));
+               $responsable->addChild('directeurcommercial', array('route' => 'list_directeurcommercial', 'label' => 'Directeur commercial'));
 
 
-        $region = $em->getRepository('BackPlanningBundle:Region')->findAll();
-        foreach ($region as $value) {
-            $menu['Service planification']->addChild($value->getName(), array('route' => 'back_planning_home', 'routeParameters' => array('regionid' => $value->getId()), 'label' => $value->getName(), 'label' =>  $value->getName()));
-            //$plan->addChild($value->getName(), array('route' => 'back_planning_home', 'routeParameters' => array('regionid' => $value->getId()), 'label' => $value->getName()));
-        }
 
 
-        //partner
-        $menu->addChild('Service commercial', array('route' => 'back_partner', 'class' => 'dropdown-toggle',
-                'attributes' => array('class' => 'dropdown', 'id' => 'partner'))
-        );
-        /*$menu['Service commercial']->setLinkAttribute('class', 'dropdown-toggle');
-        $menu['Service commercial']->setLinkAttribute('data-toggle', 'dropdown');
+                //$menu['Gestion des Utilisateurs']->addChild('Déconnexion', array('route' => 'fos_user_security_logout', 'label' => 'Déconnexion'));
+                $menu['Gestion des utilisateurs']->setLinkAttribute('class', 'dropdown-toggle');
+                $menu['Gestion des utilisateurs']->setLinkAttribute('data-toggle', 'dropdown');
 
-        $menu['Service commercial']->addChild('part', array('route' => 'back_partner', 'label' => 'Gestion des partenaires'));
-*/
+                //planning
+                $menu->addChild('Service planification', array('uri' => '#', 'class' => 'dropdown-toggle',
+                        'attributes' => array('class' => 'dropdown', 'id' => 'planning'))
+                );
+                $menu['Service planification']->setLinkAttribute('class', 'dropdown-toggle');
+                $menu['Service planification']->setLinkAttribute('data-toggle', 'dropdown');
+
+
+                $region = $em->getRepository('BackPlanningBundle:Region')->findAll();
+                foreach ($region as $value) {
+                    $menu['Service planification']->addChild($value->getName(), array('route' => 'back_planning_home', 'routeParameters' => array('regionid' => $value->getId()), 'label' => $value->getName(), 'label' =>  $value->getName()));
+                    //$plan->addChild($value->getName(), array('route' => 'back_planning_home', 'routeParameters' => array('regionid' => $value->getId()), 'label' => $value->getName()));
+                }
+
+
+                //partner
+                $menu->addChild('Service commercial', array('route' => 'back_partner', 'class' => 'dropdown-toggle',
+                        'attributes' => array('class' => 'dropdown', 'id' => 'partner'))
+                );
+                /*$menu['Service commercial']->setLinkAttribute('class', 'dropdown-toggle');
+                $menu['Service commercial']->setLinkAttribute('data-toggle', 'dropdown');
+
+                $menu['Service commercial']->addChild('part', array('route' => 'back_partner', 'label' => 'Gestion des partenaires'));
+        */
 
 /*
         //Deal

@@ -1,18 +1,18 @@
-<li><i class="icon-home"></i><a href="{{ path('main_back_homepage') }}"> Home</a> <span class="divider"><i class="icon-angle-right"></i></span></li>
 {% if wo_breadcrumbs()|length %}
     {% spaceless %}
-       <!-- <ul id="{{ listId }}" class="{{ listClass }}" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">-->
-            {% for b in breadcrumbs %}
+       <ul><li><i class="icon-home"></i><a href="{{ path('main_back_homepage') }}"> Home</a>   <i class="icon-angle-right"></i></li>
+
+           {% for b in breadcrumbs %}
                 <li{% if itemClass is defined and itemClass|length %} class="{{ itemClass }}"{% endif %}{% if not(loop.first) %} itemprop="child"{% endif %}>
                     {% if b.url and not loop.last %}<a href="{{ b.url }}" itemprop="url"{% if linkRel is defined and linkRel|length %} rel="{{ linkRel }}"{% endif %}>{% endif %}
                        {{- b.text | trans(b.translationParameters, translation_domain, locale) -}}
                         {% if b.url and not loop.last %}</a>{% endif %}
 
                     {% if separator is not null and not loop.last %}
-                        <span class="divider"><i class="icon-angle-right"></i></span>
+                        <i class="icon-angle-right"></i>
                     {% endif %}
                 </li>
             {% endfor %}
-      <!--  </ul>-->
+        </ul>
     {% endspaceless %}
 {% endif %}

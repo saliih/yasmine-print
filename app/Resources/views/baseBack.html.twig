@@ -1,204 +1,232 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<!doctype html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <!--[if IE]>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-    <title>{% block title %}.: Yasmine Press Backoffice :.{% endblock %}</title>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- Apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Apple devices fullscreen -->
+    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('RessourcesBack/css/bootstrap-responsive.min.css') }}" type="text/css" rel="stylesheet"/>
-    <link href="{{ asset('RessourcesBack/css/styles.css') }}" type="text/css" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{ asset('RessourcesBack/css/jquery.fancybox.css') }}">
-    {% block stylesheets %}
-    {% endblock %}
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ asset('back/css/bootstrap.min.css') }}">
+    <!-- Bootstrap responsive -->
+    <link rel="stylesheet" href="{{ asset('back/css/bootstrap-responsive.min.css') }}">
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="{{ asset('back/css/plugins/jquery-ui/smoothness/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('back/css/plugins/jquery-ui/smoothness/jquery.ui.theme.css') }}">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{{ asset('back/css/style.css') }}">
+
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('back/img/favicon.ico') }}" />
+    <!-- Apple devices Homescreen icon -->
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('back/img/apple-touch-icon-precomposed.png') }}" />
+
 </head>
 
-
-<body class="validationForm">
-<!--[if lt IE 7]>
-<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to
-    improve your experience.</p>
-<![endif]-->
-
-<!-- ==================== TOP MENU ==================== -->
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <a class="brand" href="{{ path('main_back_homepage') }}"><img class="img-responsive" src="{{ asset('public/images/logo.png--') }}"> </a>
-
-            <!--/.nav-collapse -->
-        </div>
-    </div>
-</div>
+<body>
+<div id="navigation">
+    <div class="container-fluid">
+        <a href="#" id="brand">FLAT</a>
+        <a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation"><i class="icon-reorder"></i></a>
+        {{ knp_menu_render('MainBackBundle:Builder:createMainMenu') }}
 
 
-<!-- ==================== SIDEBAR ==================== -->
-<div class="hiddenContent">
-    <!-- ==================== SIDEBAR COLLAPSED ==================== -->
-
-    <!-- ==================== END OF SIDEBAR COLLAPSED ==================== -->
-    <!-- ==================== SIDEBAR TASKS ==================== -->
-
-
-    <!-- ==================== SIDEBAR NOTIFICATIONS ==================== -->
-
-    <!-- ==================== SIDEBAR MESSAGES ==================== -->
-
-    <!-- ==================== END OF SIDEBAR MESSAGES ==================== -->
-
-
-
-    <!-- ==================== SIDEBAR PROFILE ==================== -->
-    <div id="profileContent">
-        <div class="sidebarDivider"></div>
-        <div class="sidebarContent">
-            <a href="#collapsedSidebarContent" class="showCollapsedSidebarMenu"><i class="icon-chevron-sign-left"></i>
-
-                <h1> Mon Compte</h1></a>
-
-            <h1>Mon Compte</h1>
-
-           <div class="profileBlock">
-                <div class="profilePhoto"
-
-                    <div class="usernameHolder">{{ app.user.name }}</div>
-
-                </div>
-                <div class="profileInfo">
-
-                    <p><i class="icon-envelope-alt"></i> {{ app.user.email }}</p>
-
-                    <p><i class="icon-globe"></i> Yasmine Press</p>
-
-                </div>
-                <footer>
-                    <div class="profileSettingBlock editProfile"
-                         onclick="$(location).attr('href','{{ path('update_profile_users') }}');"><i
-                                class="icon-user"></i>Modifier le profil
-                    </div>
-                    <!--div class="profileSettingBlock changePassword"><i class="icon-lock"></i>change password</div-->
-                    <div class="profileSettingBlock logout"
-                         onclick="$(location).attr('href','{{ path('fos_user_security_logout') }}');"><i
-                                class="icon-off"></i>Déconnexion
-                    </div>
-                </footer>
+        <div class="user">
+            <ul class="icon-nav">
+                <li class="dropdown sett">
+                    <a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-cog"></i></a>
+                    <ul class="dropdown-menu pull-right theme-settings">
+                        <li>
+                            <span>Layout-width</span>
+                            <div class="version-toggle">
+                                <a href="#" class='set-fixed'>Fixed</a>
+                                <a href="#" class="active set-fluid">Fluid</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Topbar</span>
+                            <div class="topbar-toggle">
+                                <a href="#" class='set-topbar-fixed'>Fixed</a>
+                                <a href="#" class="active set-topbar-default">Default</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Sidebar</span>
+                            <div class="sidebar-toggle">
+                                <a href="#" class='set-sidebar-fixed'>Fixed</a>
+                                <a href="#" class="active set-sidebar-default">Default</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+               <li>
+                    <a href="more-locked.html" class='lock-screen' rel='tooltip' title="Lock screen" data-placement="bottom"><i class="icon-lock"></i></a>
+                </li>
+            </ul>
+            <div class="dropdown">
+                <a href="#" class='dropdown-toggle' data-toggle="dropdown">John Doe <img src="{{ asset('back/img/demo/user-avatar.jpg') }}" alt=""></a>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a href="more-userprofile.html">Edit profile</a>
+                    </li>
+                    <li>
+                        <a href="#">Account settings</a>
+                    </li>
+                    <li>
+                        <a href="more-login.html">Sign out</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-    <!-- ==================== END OF SIDEBAR PROFILE ==================== -->
-
 </div>
-<!-- ==================== END OF SIDEBAR ==================== -->
+<div class="container-fluid" id="content">
+    <div id="left">
 
-
-    <div class="mainmenu">
-        <div class="container-fluid">
-            {{ knp_menu_render('MainBackBundle:Builder:createMainMenu', {'template': 'MainBackBundle:Menu:knp_menu.html.twig'}) }}
+        <div class="subnav">
+            <div class="subnav-title">
+                <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Content</span></a>
+            </div>
+            <ul class="subnav-menu">
+                <li>
+                    <a href="#">Articles</a>
+                </li>
+                <li>
+                    <a href="#">News</a>
+                </li>
+                <li>
+                    <a href="#">Pages</a>
+                </li>
+                <li>
+                    <a href="#">Comments</a>
+                </li>
+            </ul>
+        </div>
+        <div class="subnav">
+            <div class="subnav-title">
+                <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Plugins</span></a>
+            </div>
+            <ul class="subnav-menu">
+                <li>
+                    <a href="#">Cache manager</a>
+                </li>
+                <li>
+                    <a href="#">Import manager</a>
+                </li>
+                <li>
+                    <a href="#">Contact form generator</a>
+                </li>
+                <li>
+                    <a href="#">SEO optimization</a>
+                </li>
+            </ul>
+        </div>
+        <div class="subnav">
+            <div class="subnav-title">
+                <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Settings</span></a>
+            </div>
+            <ul class="subnav-menu">
+                <li>
+                    <a href="#">Theme settings</a>
+                </li>
+                <li>
+                    <a href="#">Page settings</a>
+                </li>
+                <li>
+                    <a href="#">Security settings</a>
+                </li>
+            </ul>
         </div>
     </div>
+    <div id="main">
+        <div class="container-fluid">
+            <div class="page-header">
+                <div class="pull-left">
 
-<div class="content1">
-    <!-- ==================== TITLE LINE FOR HEADLINE ==================== -->
-    <div class="titleLine">
-        <!--div class="container-fluid">
-            <div class="titleIcon"><i class="icon-dashboard"></i></div>
-            <ul class="titleLineHeading">
-                <li class="heading"><h1>Dashboard</h1></li>
-                <li class="subheading">the place for everything</li>
-            </ul>
-            <ul class="titleLineCharts pull-right">
-                <li>
-                    <span class="usersBar">100,235,549,222,639,335,800</span>
-                    <h2 class="cyanText">1254<span class="greyText">users</span></h2>
-                </li>
-                ...
-            </ul>
-        </div-->
-    </div>
-    <!-- ==================== END OF TITLE LINE ==================== -->
-    <!-- ==================== BREADCRUMBS / DATETIME ==================== -->
-    <ul class="breadcrumb">
-        {{ wo_render_breadcrumbs({ viewTemplate: "::breadcrumbs.html.twig" })|raw }}
+                </div>
+                <div class="pull-right">
+                    <ul class="minitiles">
+                        <li class='teal'>
+                            <a href="#"><i class="icon-inbox"></i></a>
+                        </li>
+                        <li class='red'>
+                            <a href="#"><i class="icon-cogs"></i></a>
+                        </li>
+                        <li class='lime'>
+                            <a href="#"><i class="icon-globe"></i></a>
+                        </li>
+                    </ul>
+                    <ul class="stats">
+                        <li class='blue'>
+                            <i class="icon-shopping-cart"></i>
+                            <div class="details">
+                                <span class="big">175</span>
+                                <span>New orders</span>
+                            </div>
+                        </li>
+                        <li class='green'>
+                            <i class="icon-money"></i>
+                            <div class="details">
+                                <span class="big">$324,12</span>
+                                <span>Balance</span>
+                            </div>
+                        </li>
+                        <li class='orange'>
+                            <i class="icon-calendar"></i>
+                            <div class="details">
+                                <span class="big">February 22, 2013</span>
+                                <span>Wednesday, 13:56</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="breadcrumbs">
+                {{ wo_render_breadcrumbs({ viewTemplate: "::breadcrumbs.html.twig" })|raw }}
 
-    </ul>
+            </div>
     {% block body %}
     
 	
     {% endblock %}
 
+        </div>
+    </div></div>
+<!-- jQuery -->
+<script src="{{ asset('back/js/jquery.min.js') }}"></script>
+<!-- jQuery UI -->
+<script src="{{ asset('back/js/plugins/jquery-ui/jquery.ui.core.min.js') }}"></script>
+<script src="{{ asset('back/js/plugins/jquery-ui/jquery.ui.widget.min.js') }}"></script>
+<script src="{{ asset('back/js/plugins/jquery-ui/jquery.ui.mouse.min.js') }}"></script>
+<script src="{{ asset('back/js/plugins/jquery-ui/jquery.ui.resizable.min.js') }}"></script>
+<!-- slimScroll -->
+<script src="{{ asset('back/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('back/js/bootstrap.min.js') }}"></script>
+<!-- Bootbox -->
+<script src="{{ asset('back/js/plugins/bootbox/jquery.bootbox.js') }}"></script>
+<!-- Bootbox -->
+<script src="{{ asset('back/js/plugins/form/jquery.form.min.js') }}"></script>
+<!-- Validation -->
+<script src="{{ asset('back/js/plugins/validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('back/js/plugins/validation/additional-methods.min.js') }}"></script>
 
-    <!-- ==================== END OF BREADCRUMBS / DATETIME ==================== -->
-    
-</div>
-<div class="col-md-12 text-center form-signin-footer">
-	<strong>Yasmine Press © {{ 'now'|date('Y') }}</strong>
-</div>
-
-<script src="{{ asset('RessourcesBack/js/jquery-1.10.1.min.js') }}"></script>
-<script>window.jQuery || document.write('<script src="{{ asset('js/jquery-1.10.1.min.js') }}"><\/script>')</script>
-<script src="{{ asset('RessourcesBack/js/vendor/bootstrap-slider.js') }}"></script>
-<!-- bootstrap slider plugin -->
-<script src="{{ asset('RessourcesBack/js/vendor/jquery.sparkline.min.js') }}"></script>
-<!-- small charts plugin -->
-<script src="{{ asset('RessourcesBack/js/vendor/bootstrap-multiselect.js') }}"></script>
-<!-- multiselect plugin -->
-<script src="{{ asset('RessourcesBack/js/vendor/parsley.min.js') }}"></script>
-<!-- parsley validator plugin -->
-
-<script src="{{ asset('RessourcesBack/js/vendor/bootstrap.min.js') }}"></script>
-<script src="{{ asset('RessourcesBack/js/thekamarel.js') }}"></script>
-<!-- main project js file -->
-<script src="{{ asset('RessourcesBack/js/jquery.fancybox.js') }}"></script>
-<!-- bootbox -->
-<script src="{{ asset('RessourcesBack/js/lib/bootbox/bootbox.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('public/js/jquery.form-validator.js') }}"></script>
-<script>
-
-    $(function () {
-
-        $('#multipleSelect').multiselect({
-            buttonText: function (options, select) {
-                if (options.length == 0) {
-                    return 'None selected <b class="caret"></b>';
-                }
-                else if (options.length > 1) {
-                    return options.length + ' selected <b class="caret"></b>';
-                }
-                else {
-                    var selected = '';
-                    options.each(function () {
-                        selected += $(this).text() + ', ';
-                    });
-                    return selected.substr(0, selected.length - 2) + ' <b class="caret"></b>';
-                }
-            }
-        });
-
-        $('#secondForm').parsley({
-            excluded: 'ul.dropdown-menu li input[type=checkbox]'
-        });
-        $('.iframe-btnx').fancybox({
-            'width': 880,
-            'height': 570,
-            'type': 'iframe',
-            'autoScale': false
-        });
-    });
-
-</script>
+<!-- Theme framework -->
+<script src="{{ asset('back/js/eakroko.min.js') }}"></script>
+<script src="{{ asset('back/js/plugins/bootbox/jquery.bootbox.js') }}"></script>
+<!-- Theme scripts -->
+<script src="{{ asset('back/js/application.min.js') }}"></script>
+<!-- Just for demonstration -->
+<script src="{{ asset('back/js/demonstration.min.js') }}"></script>
 {% block javascripts %}
 {% endblock %}
 </body>
+
 </html>
+
+

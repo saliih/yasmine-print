@@ -21,9 +21,10 @@ class CategoryController extends Controller
             ->getRepository('MainBackBundle:category')->findAll();
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $category, $request->query->get('page', 1)/* page number */, 20/* limit per page */
+            $category, $request->query->get('page', 1)/* page number */, 10/* limit per page */
         );
         $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Gestions des produits", $this->generateUrl("back_category"), array());
         $breadcrumbs->addItem("Gestions des Categories", $this->generateUrl("back_category"), array());
         return $this->render('MainBackBundle:category:index.html.twig', array('entities' => $category,
             'pagination' => $pagination));
