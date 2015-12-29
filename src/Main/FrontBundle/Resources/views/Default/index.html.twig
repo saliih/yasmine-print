@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div id="carousel-example-generic" class="carousel slide slider" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+            {%  set i = 0 %}
+            {% for item in banner %}
+            <div class="item{% if i ==0 %} active{% endif %}">
+                <img src="{{ asset('uploads/banner/'~ item.brochure) }}" >
+            </div>
+                {% set i = i+1 %}
+               {%  endfor %}
+
+        </div>
+
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <div class="container text-center content">
+        <h4 class="text-uppercase">yasmine press, consectetur adipisicing elit, sed do eiusmod tempor</h4>
+        <p>
+            Praesent eget ultricies leo. Donec eu aliquam ipsum. Proin suscipit venenatis arcu, ut cursus sapien interdum vitae. Aliquam erat volutpat. Vivamus et dapibus lacus. Suspendisse eget augue eleifend, sodales lectus sit amet, adipiscing ante. Nulla mattis, magna ac pellentesque condimentum, elit urna pulvinar magna, nec iaculis neque augue vel nisl. In odio diam, aliquam eget venenatis quis, iaculis ut lectus. Quisque feugiat suscipit ante, eget pharetra nisi volutpat at.
+            Sed feugiat laoreet gravida. Donec nec nisl lacus. Integer at adipiscing purus, vitae porttitor risus.
+        </p>
+
+        <a href="#" class="btn btn-green text-uppercase" type="a">
+            Lire la suite
+        </a>
+
+    </div>
+    <div class="nos_prestations">
+        <div class="container text-center content">
+
+            <h4 class="text-uppercase">Nos <b>prestations</b></h4>
+            <p>
+                Praesent eget ultricies leo. Donec eu aliquam ipsum. Proin suscipit venenatis arcu, ut cursus sapien interdum vitae. Aliquam erat volutpat. Vivamus et dapibus lacus. Suspendisse eget augue eleifend, sodales lectus sit amet, adipiscing ante.
+                Nulla mattis, magna ac pellentesque condimentum, elit urna pulvinar magna, nec iaculis neque
+            </p>
+            <div class="owl-carousel-control">
+                <a class="btn prev glyphicon glyphicon-chevron-left"></a>
+                <a class="btn next glyphicon glyphicon-chevron-right"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="carousel-multi">
+{% endblock %}

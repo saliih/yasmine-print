@@ -1,0 +1,79 @@
+{% extends '::baseBack.html.twig' %}
+{% form_theme form 'form_table_layout.html.twig' %}
+{% block body -%}
+<div class="content">
+    <div class="container-fluid">
+
+        <!-- ==================== COMMON ELEMENTS ROW ==================== -->
+        <div class="row-fluid">
+            <div class="span12">
+                <!-- ==================== TEXT INPUTS HEADLINE ==================== -->
+                <div class="containerHeadline">
+                    <i class="icon-edit"></i><h2>Ajouter/Modifier une catégorie</h2>
+                    <div class="controlButton pull-right"><i class="icon-remove removeElement"></i></div>
+                    <div class="controlButton pull-right"><i class="icon-caret-down minimizeElement"></i></div>
+                </div>
+                <!-- ==================== END OF TEXT INPUTS HEADLINE ==================== -->
+
+                <!-- ==================== TEXT INPUTS FLOATING BOX ==================== -->
+                <div class="floatingBox">
+                    <div class="container-fluid">
+                        <h2>Catégorie {{ banner.name }}</h2>
+                        <div class="container-fluid">
+                            {{ form_start(form, {'method': 'POST','attr': {'class': 'form-horizontal contentForm'}}) }}
+
+                            {{ form_row(form.name) }}
+                            {{ form_row(form.brochure) }}
+                            {{ form_row(form.ord) }}
+                            <div class="formFooter">
+                                <button type="submit" class="btn btn-success"><i class="icon-ok"> </i> Valider</button>
+                                <button type="reset" class="btn btn-danger"><i class="icon-remove"> </i> Effacer</button>
+                                <a href="{{ path('back_banner') }}"><button class="btn btn-inverse" type="button"><i class="icon-list"></i> Liste</button></a>
+                                {{ form_widget(form._token) }}
+                            </div>
+                            {{ form_end(form) }}
+                    </div>
+                </div>
+                <!-- ==================== END OF TEXT INPUTS FLOATING BOX ==================== -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block stylesheets %}
+
+<link rel="stylesheet" href="{{ asset('RessourcesBack/css/pick-a-color-1.2.3.min.css') }}">
+
+<style type="text/css">
+
+
+    .pick-a-color
+    {
+        height: 34px !important;
+    }
+
+</style>
+{% endblock %}
+{% block javascripts %}
+
+<script src="{{ asset('RessourcesBack/js/vendor/bootstrap-colorpicker.js') }}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#back_planningbundle_banner_name").attr({
+            'data-validation': 'required'
+        });
+        $("#back_planningbundle_banner_color").attr({
+            'data-validation': 'required'
+        });
+        $.validate();
+    });
+    $(document).ready(function() {
+        $('#back_planningbundle_banner_color').colorpicker();
+
+
+    });
+
+</script>
+        {% endblock %}
+

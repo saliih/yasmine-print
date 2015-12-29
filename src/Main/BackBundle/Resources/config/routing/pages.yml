@@ -1,0 +1,11 @@
+back_pages:
+    path:     /
+    defaults: { _controller: MainBackBundle:Pages:index }
+update_page_manager:
+    path:     /update/{id}
+    defaults: { _controller: MainBackBundle:Pages:update }
+    requirements:
+        id: \d+
+add_page_manager:
+    path:     /add
+    defaults: { _controller: MainBackBundle:Pages:add }

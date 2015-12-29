@@ -2,7 +2,7 @@
 {% block body -%}
     <div class="content">
         <div class="container-fluid">
-            <a href="{{ path('dash_category') }}"><button class="btn btn-inverse pull-right" type="button"><i class="icon-list"></i> Liste</button></a>
+            <a href="{{ path('dash_banner') }}"><button class="btn btn-inverse pull-right" type="button"><i class="icon-list"></i> Liste</button></a>
             <!-- ==================== COMMON ELEMENTS ROW ==================== -->
             <div class="row-fluid">
                 <div class="span12">
@@ -14,7 +14,7 @@
                     <!-- ==================== TEXT INPUTS FLOATING BOX ==================== -->
                     <div class="floatingBox">
                         <div class="container-fluid">
-                            <form class="form-horizontal contentForm" method="POST" action="{{path('dash_category_create')}}">
+                            <form class="form-horizontal contentForm" method="POST" action="{{path('dash_banner_create')}}">
                                 <div class="control-group">
                                     <label class="control-label">Nom</label>
                                     <div class="controls">

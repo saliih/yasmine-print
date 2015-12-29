@@ -1,0 +1,72 @@
+{% extends '::baseBack.html.twig' %}
+{% form_theme form 'form_table_layout.html.twig' %}
+{% block javascripts %}
+    <script src="{{ asset('tinymce/tinymce.min.js') }}"></script>
+    <script>
+        tinymce.init({
+            selector: '#back_pagebundle_pages_body',
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen ",
+                "insertdatetime media table contextmenu paste moxiemanager responsivefilemanager filemanager importcss textcolor "
+            ],
+            toolbar: "insertfile undo redo | styleselect | forecolor fontselect fontsizeselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor table",
+            autosave_ask_before_unload: false,
+            theme_advanced_fonts: "Arial=arial,helvetica,sans-serif;Arial Black=arial black;Courier New=courier new,courier,monospace;Times New Roman=times new roman;Georgia=georgia;Comic Sans MS=comic sans ms;Book Antiqua=book antiqua;Tahoma=tahoma;Trebuchet MS=trebuchet ms;",
+            max_height: 600,
+            min_height: 160,
+            height: 180
+        });
+    </script>
+{% endblock %}
+{% block body -%}
+    <div class="content">
+        <div class="container-fluid">
+
+            <!-- ==================== COMMON ELEMENTS ROW ==================== -->
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- ==================== TEXT INPUTS HEADLINE ==================== -->
+                    <div class="containerHeadline">
+                        <i class="icon-edit"></i>
+
+                        <h2>Ajouter/Modifier une page</h2>
+                    </div>
+                    <!-- ==================== END OF TEXT INPUTS HEADLINE ==================== -->
+
+                    <!-- ==================== TEXT INPUTS FLOATING BOX ==================== -->
+                    <div class="floatingBox">
+                        <div class="container-fluid">
+                            <h2>Page {{ page.name }}</h2>
+
+                            <div class="container-fluid">
+                                {{ form_start(form, {'method': 'POST','attr': {'class': 'form-horizontal contentForm'}}) }}
+                                {{ form_row(form.name) }}
+                                {{ form_row(form.body) }}
+
+
+                                <div class="formFooter">
+                                    <button type="submit" class="btn btn-success"><i class="icon-ok"> </i>
+                                        Valider
+                                    </button>
+                                    <button type="reset" class="btn btn-danger"><i class="icon-remove"> </i>
+                                        Effacer
+                                    </button>
+                                    <a href="{{ path('back_region') }}">
+                                        <button class="btn btn-inverse" type="button"><i class="icon-list"></i>
+                                            Liste
+                                        </button>
+                                    </a>
+                                    {{ form_widget(form._token) }}
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ==================== END OF TEXT INPUTS FLOATING BOX ==================== -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

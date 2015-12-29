@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Main\FrontBundle\MainFrontBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

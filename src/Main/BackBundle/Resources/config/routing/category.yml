@@ -1,0 +1,23 @@
+#categorie
+back_category:
+    path:     /
+    defaults: { _controller: MainBackBundle:Category:index }
+
+add_category_manager:
+    path:     /add
+    defaults: { _controller: MainBackBundle:Category:add }
+update_category_manager:
+    path:     /update/{id}
+    defaults: { _controller: MainBackBundle:Category:edit}
+    requirements:
+        id: \d+
+delete_category_manager:
+    path:     /delete/{id}
+    defaults: { _controller: MainBackBundle:Category:delete}
+    requirements:
+        id: \d+
+show_category_manager:
+    path:     /show/{id}
+    defaults: { _controller: MainBackBundle:Category:show}
+    requirements:
+        id: \d+

@@ -1,3 +1,8 @@
+main_front:
+    resource: "@MainFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
 main_back:
     resource: "@MainBackBundle/Resources/config/routing.yml"
     prefix:   /Manager

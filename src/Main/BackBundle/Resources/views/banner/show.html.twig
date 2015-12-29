@@ -5,12 +5,12 @@
     <!-- ==================== WIDGETS CONTAINER ==================== -->
     <div class="container-fluid">
 
-        <a href="{{ path('add_category_manager') }}"><button class="btn btn-danger" type="button"><i class="icon-plus"></i> Ajouter</button></a>
-        <a href="{{ path('update_category_manager', { 'id': entity.id }) }}"><button class="btn btn-info" type="button"><i class="icon-pencil"></i> Modifier</button></a>
-        <a class="btn btn-danger" href="javascript:confirmdeletbox('{{ path('delete_category_manager', {'id': entity.id}) }}')"><i class="icon-remove"> </i> Supprimer</a>
-       {% if entity.parent!=null %} <a href="{{ path('back_requiredInfo', { 'category_id': entity.id }) }}"><button class="btn btn-info" type="button"><i class="icon-pencil"></i> Question</button></a>{% endif %}
+        <a href="{{ path('add_banner_manager') }}"><button class="btn btn-danger" type="button"><i class="icon-plus"></i> Ajouter</button></a>
+        <a href="{{ path('update_banner_manager', { 'id': entity.id }) }}"><button class="btn btn-info" type="button"><i class="icon-pencil"></i> Modifier</button></a>
+        <a class="btn btn-danger" href="javascript:confirmdeletbox('{{ path('delete_banner_manager', {'id': entity.id}) }}')"><i class="icon-remove"> </i> Supprimer</a>
+       {% if entity.parent!=null %} <a href="{{ path('back_requiredInfo', { 'banner_id': entity.id }) }}"><button class="btn btn-info" type="button"><i class="icon-pencil"></i> Question</button></a>{% endif %}
 
-        <a class ="btn btn-inverse pull-right" href="{{ path('back_category') }}"><i class="icon-list"></i> Liste</a>
+        <a class ="btn btn-inverse pull-right" href="{{ path('back_banner') }}"><i class="icon-list"></i> Liste</a>
         <br/>
         <!-- ==================== END OF ROW ==================== -->
         <div class="row-fluid">
