@@ -6,7 +6,7 @@
             {%  set i = 0 %}
             {% for item in banner %}
             <div class="item{% if i ==0 %} active{% endif %}">
-                <img src="{{ asset('uploads/banner/'~ item.brochure) }}" >
+                <img src="{{ asset('uploads/banner/'~ item.brochure) }}" style="width: 100%;" >
             </div>
                 {% set i = i+1 %}
                {%  endfor %}
