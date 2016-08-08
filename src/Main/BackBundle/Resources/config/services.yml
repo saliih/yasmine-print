@@ -1,4 +1,0 @@
-services:
-#    main_back.example:
-#        class: Main\BackBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]

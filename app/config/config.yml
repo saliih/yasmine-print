@@ -2,16 +2,16 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@MainBackBundle/Resources/config/services.yml" }
+    - { resource: sonata.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -40,6 +40,8 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
+        types:
+            json: Sonata\Doctrine\Types\JsonType
         driver:   pdo_mysql
         host:     "%database_host%"
         port:     "%database_port%"
@@ -53,11 +55,14 @@ doctrine:
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #     path:     "%database_path%"
-
     orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        entity_managers:
+            default:
+                mappings:
+                    ApplicationSonataUserBundle: ~
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
+                    MainFrontBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -68,12 +73,18 @@ swiftmailer:
     spool:     { type: memory }
 
 fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: User\UserBundle\Entity\User
-    registration:
-        form:
-            type: user_userbundle_registration
+    db_driver:      orm # can be orm or odm
+    firewall_name:  admin
+    user_class:     Application\Sonata\UserBundle\Entity\User
+
+
+    group:
+        group_class:   Application\Sonata\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
+
+    service:
+        user_manager: sonata.user.orm.user_manager
+
 knp_menu:
     twig:
         template: MainBackBundle:Menu:knp_menu.html.twig

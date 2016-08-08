@@ -8,7 +8,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $banner = $this->getDoctrine()->getRepository('MainBackBundle:banner')->findBy(array(),array("ord"=>"ASC"));
+        $banner = $this->getDoctrine()->getRepository('MainFrontBundle:banner')->findBy(array(),array("ord"=>"ASC"));
         return $this->render('MainFrontBundle:Default:index.html.twig',
             array(
                 'banner'=>$banner
@@ -17,7 +17,7 @@ class DefaultController extends Controller
 
     public function categoryMenuAction()
     {
-        $categories = $this->getDoctrine()->getRepository('MainBackBundle:category')->findBy(array('act' => true), array('name' => 'ASC'));
+        $categories = $this->getDoctrine()->getRepository('MainFrontBundle:category')->findBy(array('act' => true), array('name' => 'ASC'));
         return $this->render('MainFrontBundle:Menu:category.html.twig', array(
             'categories' => $categories
         ));
