@@ -7,3 +7,6 @@ pages_contenue:
 demande_devis:
     path:     /yasmine-press/imprimerie/demandedevis
     defaults: { _controller: MainFrontBundle:Page:devis }
+form_contact:
+    path:     /yasmine-press/imprimerie/contact
+    defaults: { _controller: MainFrontBundle:Page:contact }
