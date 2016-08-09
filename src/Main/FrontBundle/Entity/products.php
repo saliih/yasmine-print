@@ -34,11 +34,22 @@ class products
      */
     private $act;
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="accostumiset", type="boolean")
+     */
+    private $costumise;
+    /**
      * @var string
      *
      * @ORM\Column(name="descript", type="text", nullable=true)
      */
     private $descript;
+    /**
+     * @ORM\ManyToOne(targetEntity="category", inversedBy="produits")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")
+     **/
+    private $category;
     /**
      * Get id
      *
@@ -48,6 +59,7 @@ class products
     {
         return $this->id;
     }
+
     /**
      * Set name
      *
@@ -60,6 +72,7 @@ class products
         $this->name = $name;
         return $this;
     }
+
     /**
      * Get name
      *
@@ -69,6 +82,7 @@ class products
     {
         return $this->name;
     }
+
     /**
      * Set act
      *
@@ -81,6 +95,7 @@ class products
         $this->act = $act;
         return $this;
     }
+
     /**
      * Get act
      *
@@ -90,6 +105,7 @@ class products
     {
         return $this->act;
     }
+
     /**
      * Set descript
      *
@@ -102,6 +118,7 @@ class products
         $this->descript = $descript;
         return $this;
     }
+
     /**
      * Get descript
      *
@@ -110,5 +127,53 @@ class products
     public function getDescript()
     {
         return $this->descript;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Main\FrontBundle\Entity\category $category
+     *
+     * @return products
+     */
+    public function setCategory(\Main\FrontBundle\Entity\category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Main\FrontBundle\Entity\category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set costumise
+     *
+     * @param boolean $costumise
+     *
+     * @return products
+     */
+    public function setCostumise($costumise)
+    {
+        $this->costumise = $costumise;
+
+        return $this;
+    }
+
+    /**
+     * Get costumise
+     *
+     * @return boolean
+     */
+    public function getCostumise()
+    {
+        return $this->costumise;
     }
 }

@@ -37,6 +37,11 @@ class pages
      * @ORM\Column(name="body", type="text", nullable=true)
      */
     private $body;
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * Get id
      *

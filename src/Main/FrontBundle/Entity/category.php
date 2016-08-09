@@ -38,6 +38,16 @@ class category
      * @ORM\Column(name="color", type="string", length=12)
      */
     private $color;
+
+    /**
+     * @ORM\OneToMany(targetEntity="products", mappedBy="category", cascade={"persist"})
+     */
+    private $produits;
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * Get id
      *
@@ -109,5 +119,46 @@ class category
     public function getColor()
     {
         return $this->color;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add produit
+     *
+     * @param \Main\FrontBundle\Entity\products $produit
+     *
+     * @return category
+     */
+    public function addProduit(\Main\FrontBundle\Entity\products $produit)
+    {
+        $this->produits[] = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Remove produit
+     *
+     * @param \Main\FrontBundle\Entity\products $produit
+     */
+    public function removeProduit(\Main\FrontBundle\Entity\products $produit)
+    {
+        $this->produits->removeElement($produit);
+    }
+
+    /**
+     * Get produits
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProduits()
+    {
+        return $this->produits;
     }
 }

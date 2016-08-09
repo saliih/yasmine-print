@@ -4,6 +4,7 @@ namespace Main\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * banner
  *
@@ -38,15 +39,49 @@ class banner
      * @ORM\Column(name="brochure",type="string", nullable=true)
      */
     private $brochure;
+    protected $SERVER_PATH_TO_IMAGE_FOLDER = 'uploads/banner';
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    public function upload()
+    {
+
+        // the file property can be empty if the field is not required
+        if (null === $this->getBrochure()) {
+            return;
+        }
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and target filename as params
+        $this->getBrochure()->move(
+            $this->SERVER_PATH_TO_IMAGE_FOLDER,
+            $this->getBrochure()->getClientOriginalName()
+        );
+
+        // set the path property to the filename where you've saved the file
+        $this->brochure = $this->getBrochure()->getClientOriginalName();
+
+        // clean up the file property as you won't need it anymore
+       // $this->setBrochure(null);
+    }
+
+
     public function getBrochure()
     {
         return $this->brochure;
     }
+
     public function setBrochure($brochure)
     {
         $this->brochure = $brochure;
         return $this;
     }
+
     /**
      * Get id
      *
@@ -56,6 +91,7 @@ class banner
     {
         return $this->id;
     }
+
     /**
      * Set name
      *
@@ -68,6 +104,7 @@ class banner
         $this->name = $name;
         return $this;
     }
+
     /**
      * Get name
      *
@@ -77,6 +114,7 @@ class banner
     {
         return $this->name;
     }
+
     /**
      * Set ord
      *
@@ -89,6 +127,7 @@ class banner
         $this->ord = $ord;
         return $this;
     }
+
     /**
      * Get ord
      *
