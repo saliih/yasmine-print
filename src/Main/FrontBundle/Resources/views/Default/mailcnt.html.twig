@@ -1,0 +1,24 @@
+
+<table width="70%" border="1" align="center">
+    <tr>
+        <th width="40%">Nom</th>
+        <td>{{ form.name }}</td>
+    </tr>
+    <tr>
+        <th width="40%">email</th>
+        <td>{{ form.email }}</td>
+    </tr>
+    <tr>
+        <th width="40%">Téléphone</th>
+        <td>{{ form.gsm }}</td>
+    </tr>
+    <tr>
+        <th>Sujet </th>
+        <td>{{ form.subject }}</td>
+    </tr>
+
+    <tr>
+        <th>Message</th>
+        <td>{{ (form.body)|raw }}</td>
+    </tr>
+</table> 

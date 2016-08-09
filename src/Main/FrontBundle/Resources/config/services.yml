@@ -23,6 +23,18 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Produits, group: Produithèque}
 
+    admin.formula:
+        class: Main\FrontBundle\Admin\FormulaAdmin
+        arguments: [~, Main\FrontBundle\Entity\formule, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Demande de devis, group: Feedback, icon: '<i class="fa fa-archive"></i>'}
+
+    admin.contact:
+        class: Main\FrontBundle\Admin\ContactAdmin
+        arguments: [~, Main\FrontBundle\Entity\contact, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Contact, group: Feedback,  icon: '<i class="fa fa-archive"></i>'}
+
 
 
 

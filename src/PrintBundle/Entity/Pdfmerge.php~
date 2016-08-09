@@ -1,0 +1,231 @@
+<?php
+
+namespace PrintBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Pdfmerge
+ *
+ * @ORM\Table(name="pdfmerge")
+ * @ORM\Entity(repositoryClass="PrintBundle\Repository\PdfmergeRepository")
+ */
+class Pdfmerge
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     */
+    private $name;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="marge", type="string", length=255, nullable=true)
+     */
+    private $marge;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nbpage", type="string", length=255, nullable=true)
+     */
+    private $nbpage;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="width", type="float", nullable=true)
+     */
+    private $width;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="height", type="float", nullable=true)
+     */
+    private $height;
+    /**
+     * @ORM\OneToMany(targetEntity="pdflist", mappedBy="pdfmerge", cascade={"persist"})
+     */
+    private $pdflist;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->marge = 0;
+        $this->pdflist = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Pdfmerge
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set orientaion
+     *
+     * @param string $orientaion
+     *
+     * @return Pdfmerge
+     */
+    public function setOrientaion($orientaion)
+    {
+        $this->orientaion = $orientaion;
+
+        return $this;
+    }
+
+    /**
+     * Get orientaion
+     *
+     * @return string
+     */
+    public function getOrientaion()
+    {
+        return $this->orientaion;
+    }
+
+    /**
+     * Set marge
+     *
+     * @param string $marge
+     *
+     * @return Pdfmerge
+     */
+    public function setMarge($marge)
+    {
+        $this->marge = $marge;
+
+        return $this;
+    }
+
+    /**
+     * Get marge
+     *
+     * @return string
+     */
+    public function getMarge()
+    {
+        return $this->marge;
+    }
+
+    /**
+     * Set width
+     *
+     * @param float $width
+     *
+     * @return Pdfmerge
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return float
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set height
+     *
+     * @param float $height
+     *
+     * @return Pdfmerge
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return float
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Add pdflist
+     *
+     * @param \PrintBundle\Entity\pdflist $pdflist
+     *
+     * @return Pdfmerge
+     */
+    public function addPdflist(\PrintBundle\Entity\pdflist $pdflist)
+    {
+        $this->pdflist[] = $pdflist;
+
+        return $this;
+    }
+
+    /**
+     * Remove pdflist
+     *
+     * @param \PrintBundle\Entity\pdflist $pdflist
+     */
+    public function removePdflist(\PrintBundle\Entity\pdflist $pdflist)
+    {
+        $this->pdflist->removeElement($pdflist);
+    }
+
+    /**
+     * Get pdflist
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPdflist()
+    {
+        return $this->pdflist;
+    }
+}

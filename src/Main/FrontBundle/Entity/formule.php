@@ -306,6 +306,7 @@ class formule
     public function setDatenaisse($datenaisse)
     {
         $this->datenaisse = $datenaisse;
+        $this->datenaisse = $datenaisse;
 
         return $this;
     }

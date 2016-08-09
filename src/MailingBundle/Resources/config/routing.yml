@@ -1,0 +1,17 @@
+
+previewmailing:
+    path: /view/{name}
+    defaults: { _controller: MailingBundle:Preview:index }
+    requirements:
+        name: '[^/]++'
+dropmailing:
+    path: /dropmailing/{email}
+    defaults: { _controller: MailingBundle:Preview:drop }
+    requirements:
+        email: '[^/]++'
+imlgmailing:
+    path: /imgmailing/{email}/{name}
+    defaults: { _controller: MailingBundle:Preview:img }
+    requirements:
+        email: '[^/]++'
+        name: '[^/]++'

@@ -75,15 +75,14 @@ class products
         // sanitize it at least to avoid any security issues
 
         // move takes the target directory and target filename as params
-        if ($this->getPicture() instanceof Symfony\Component\HttpFoundation\File\UploadedFile) {
-            $this->getPicture()->move(
-                $this->SERVER_PATH_TO_IMAGE_FOLDER,
-                $this->getPicture()->getClientOriginalName()
-            );
+        $this->getPicture()->move(
+            $this->SERVER_PATH_TO_IMAGE_FOLDER,
+            $this->getPicture()->getClientOriginalName()
+        );
 
-            // set the path property to the filename where you've saved the file
-            $this->picture = $this->getPicture()->getClientOriginalName();
-        }
+        // set the path property to the filename where you've saved the file
+        $this->picture = $this->getPicture()->getClientOriginalName();
+
         // clean up the file property as you won't need it anymore
         // $this->setBrochure(null);
     }

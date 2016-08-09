@@ -1,0 +1,24 @@
+services:
+#    print.example:
+#        class: PrintBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+#    admin.template:
+#        class: PrintBundle\Admin\TemplateAdmin
+#        arguments: [~, PrintBundle\Entity\Template, PrintBundle:CRUD]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Templates }
+
+    admin.pdfmerge:
+        class: PrintBundle\Admin\PdfmergeAdmin
+        arguments: [~, PrintBundle\Entity\Pdfmerge, PrintBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Collection des Carte visite }
+        calls:
+            - [addChild, ['@admin.pdflist']]
+            - [ setTemplate, [edit, PrintBundle:Merge:edit.html.twig]]
+
+    admin.pdflist:
+        class: PrintBundle\Admin\PdflistAdmin
+        arguments: [~, PrintBundle\Entity\pdflist, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm,show_in_dashboard: false }

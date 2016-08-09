@@ -1,0 +1,392 @@
+<?php
+
+namespace PrintBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
+
+/**
+ * Template
+ *
+ * @ORM\Table(name="template")
+ * @ORM\Entity(repositoryClass="PrintBundle\Repository\TemplateRepository")
+ */
+class Template
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="options", type="json_array", nullable=true)
+     */
+    private $options;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="aifile", type="string", length=255, nullable=true)
+     */
+    private $file;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="width", type="float", nullable=true)
+     */
+    private $width;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="height", type="float", nullable=true)
+     */
+    private $height;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pdffile", type="string", length=255, nullable=true)
+     */
+    private $pdffile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="jpgfile", type="string", length=255, nullable=true)
+     */
+    private $jpgfile;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    private $updated;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dcr", type="datetime", nullable=true)
+     */
+    private $dcr;
+    /**
+     * @ORM\OneToMany(targetEntity="Options", mappedBy="template", cascade={"persist"})
+     */
+    private $childactivity;
+    public function getAbsolutePath()
+    {
+        return null === $this->file ? null : $this->getUploadRootDir().'/'.$this->file;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->file ? null : $this->getUploadDir().'/'.$this->file;
+    }
+
+    protected function getUploadRootDir($basepath)
+    {
+        // the absolute directory path where uploaded documents should be saved
+        return $basepath.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'uploads/ai';
+    }
+
+    public function upload($basepath)
+    {
+        $time = time();
+        // the file property can be empty if the field is not required
+        if (null === $this->file) {
+            return;
+        }
+
+        if (null === $basepath) {
+            return;
+        }
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and then the target filename to move to
+        $this->file->move($this->getUploadRootDir($basepath), $time.$this->file->getClientOriginalName());
+
+        // set the path property to the filename where you'ved saved the file
+        $this->setFile($time.$this->file->getClientOriginalName());
+
+    }
+    /**
+     * construct
+     */
+    public function __construct()
+    {
+        $this->dcr = new \DateTime();
+    }
+
+   
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Template
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set options
+     *
+     * @param array $options
+     * @return Template
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * Get options
+     *
+     * @return array 
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Template
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set width
+     *
+     * @param float $width
+     * @return Template
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return float 
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * Set height
+     *
+     * @param float $height
+     * @return Template
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return float 
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Set pdffile
+     *
+     * @param string $pdffile
+     * @return Template
+     */
+    public function setPdffile($pdffile)
+    {
+        $this->pdffile = $pdffile;
+
+        return $this;
+    }
+
+    /**
+     * Get pdffile
+     *
+     * @return string 
+     */
+    public function getPdffile()
+    {
+        return $this->pdffile;
+    }
+
+    /**
+     * Set jpgfile
+     *
+     * @param string $jpgfile
+     * @return Template
+     */
+    public function setJpgfile($jpgfile)
+    {
+        $this->jpgfile = $jpgfile;
+
+        return $this;
+    }
+
+    /**
+     * Get jpgfile
+     *
+     * @return string 
+     */
+    public function getJpgfile()
+    {
+        return $this->jpgfile;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Template
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set dcr
+     *
+     * @param \DateTime $dcr
+     * @return Template
+     */
+    public function setDcr($dcr)
+    {
+        $this->dcr = $dcr;
+
+        return $this;
+    }
+
+    /**
+     * Get dcr
+     *
+     * @return \DateTime 
+     */
+    public function getDcr()
+    {
+        return $this->dcr;
+    }
+
+    /**
+     * Add childactivity
+     *
+     * @param \PrintBundle\Entity\Options $childactivity
+     *
+     * @return Template
+     */
+    public function addChildactivity(\PrintBundle\Entity\Options $childactivity)
+    {
+        $this->childactivity[] = $childactivity;
+
+        return $this;
+    }
+
+    /**
+     * Remove childactivity
+     *
+     * @param \PrintBundle\Entity\Options $childactivity
+     */
+    public function removeChildactivity(\PrintBundle\Entity\Options $childactivity)
+    {
+        $this->childactivity->removeElement($childactivity);
+    }
+
+    /**
+     * Get childactivity
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildactivity()
+    {
+        return $this->childactivity;
+    }
+}

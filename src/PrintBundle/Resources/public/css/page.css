@@ -1,0 +1,25 @@
+page {
+    background: #ffffff;
+    display: block;
+    position: absolute;
+    margin: 20px auto;
+    /*margin-bottom: 0.5cm;*/
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.boxaaa{
+    background-color: rgb(230, 230, 230);
+    cursor: pointer;
+    border: 5px solid rgb(127, 0, 0);
+    border: 5px solid rgba(255, 0, 0, 0);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    font-weight: 600;
+    height: 45px;
+    width: 25%;
+    line-height: 30px;
+    /* margin: 10px 10px 0 0; */
+}

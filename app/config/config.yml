@@ -4,6 +4,8 @@ imports:
     - { resource: services.yml }
     - { resource: sonata.yml }
     - { resource: '@MainFrontBundle/Resources/config/services.yml' }
+    - { resource: '@PrintBundle/Resources/config/services.yml' }
+    - { resource: '@MailingBundle/Resources/config/services.yml' }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -63,6 +65,8 @@ doctrine:
                     SonataUserBundle: ~
                     FOSUserBundle: ~
                     MainFrontBundle: ~
+                    MailingBundle: ~
+                    PrintBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -103,3 +107,6 @@ knp_paginator:
 
 white_october_breadcrumbs:
     itemClass:          active
+
+fos_js_routing:
+    routes_to_expose: [ admin_mailing_modelmailing_ajaxsend ]

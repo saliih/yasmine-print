@@ -1,0 +1,3 @@
+options:
+    type:     rest
+    resource: PrintBundle\Controller\Rest\OptionsController

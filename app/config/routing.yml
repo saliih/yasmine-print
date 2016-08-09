@@ -14,8 +14,16 @@ admin_area:
 sonata_user_admin_security:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /admin
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
+mailing:
+    resource: "@MailingBundle/Resources/config/routing.yml"
+    prefix:   /preview
 
+print:
+    resource: "@PrintBundle/Resources/config/routing.yml"
+    prefix:   /ddd
 
 sonata_user_security:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"

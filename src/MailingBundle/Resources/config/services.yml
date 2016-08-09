@@ -1,0 +1,40 @@
+services:
+
+
+
+
+    admin.mailinglist:
+        class: MailingBundle\Admin\MailinglistAdmin
+        arguments: [~, MailingBundle\Entity\mailinglist, ~] #MailingBundle:CRUD
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Mailing" ,label: 'Mailing list', icon:'<i class="fa fa-envelope"></i>' }
+        calls:
+            #- [ setTemplate, [edit, MainFactBundle:Projects:edit.html.twig]]
+    admin.mailinglisttest:
+        class: MailingBundle\Admin\MailinglistTestAdmin
+        arguments: [~, MailingBundle\Entity\mailinglisttest, ~] #MailingBundle:CRUD
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Mailing" ,label: 'Mailing list Test', icon:'<i class="fa fa-envelope"></i>' }
+        calls:
+            #- [ setTemplate, [edit, MainFactBundle:Projects:edit.html.twig]]
+    admin.mailingcfg:
+        class: MailingBundle\Admin\CfgMailingAdmin
+        arguments: [~, MailingBundle\Entity\cfgmailing, ~] #
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Mailing" ,label: 'Configuration Mailing', icon:'<i class="fa fa-envelope"></i>' }
+        calls:
+            #- [ setTemplate, [edit, MainFactBundle:Projects:edit.html.twig]]
+    admin.template:
+        class: MailingBundle\Admin\TemplateAdmin
+        arguments: [~, MailingBundle\Entity\modelmailing, MailingBundle:CRUD] #MailingBundle:CRUD
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Mailing" ,label: 'Models Mailing', icon:'<i class="fa fa-envelope"></i>' }
+        calls:
+            - [ setTemplate, [edit, MailingBundle:template:edit.html.twig]]
+#    admin.sender:
+#        class: MailingBundle\Admin\SenderAdmin
+#        arguments: [~, MailingBundle\Entity\modelmailing, MailingBundle:CRUD ]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: "Mailing" ,label: 'Envoi Mailing', icon:'<i class="fa fa-envelope"></i>' }
+#        calls:
+#            - [ setTemplate, [edit, MailingBundle:template:edit.html.twig]]

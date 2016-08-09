@@ -56,7 +56,6 @@ class ProductsAdmin extends Admin
     }
     public function preUpdate($object)
     {
-        if(is_string($object->getPicture()) )
         $object->upload();
     }
 }

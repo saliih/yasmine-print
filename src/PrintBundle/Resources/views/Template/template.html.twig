@@ -1,0 +1,59 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+ {% block stylesheets %}
+     {{ parent() }}
+     {% stylesheets '@PrintBundle/Resources/public/css/page.css' %}
+     <link rel="stylesheet" href="{{ asset_url }}"/>
+     {% endstylesheets %}
+ {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var objectTemplate = {{ template.id }};
+        var objectTemplatewidth = {{ template.width }};
+        var objectTemplateheight = {{ template.height }};
+        var objectTemplatepng = "{{ asset('uploads/png/'~template.jpgfile) }}";
+    </script>
+    {% javascripts
+    '@PrintBundle/Resources/public/js/define.js'
+    '@PrintBundle/Resources/public/js/vendor/bootstrap-notify.min.js'
+    '@PrintBundle/Resources/public/js/vendor/bootbox.min.js'
+    '@PrintBundle/Resources/public/js/vendor/underscore.js'
+    '@PrintBundle/Resources/public/js/vendor/backbone.js'
+    '@PrintBundle/Resources/public/js/vendor/backform.js'
+    '@PrintBundle/Resources/public/js/app.js'
+    '@PrintBundle/Resources/public/js/routers/rooter.js'
+    '@PrintBundle/Resources/public/js/models/template.js'
+    '@PrintBundle/Resources/public/js/form/OptionForm.js'
+    '@PrintBundle/Resources/public/js/models/OptionsModel.js'
+    '@PrintBundle/Resources/public/js/collections/OptionsCollection.js'
+    '@PrintBundle/Resources/public/js/views/TemplateCrud.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+
+{% endblock %}
+{% block sonata_admin_content %}
+    <div class="col-xs-8 col-md-8" id="jobzone">
+        <div class="box box-danger" style="margin-bottom: 10px;">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group" role="group" aria-label="First group">
+                    <button type="button" id="addinput" class="btn btn-default"><i class="fa fa-text-width"></i>
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="box box-warning" id="allelement" style="margin-bottom: 10px;">
+
+
+        </div>
+        <div class="box box-info" style="margin-bottom: 100px; height: auto; background-color: #e5e6e6;" id="job">
+            <page></page>
+        </div>
+    </div>
+    <div class="col-xs-4 col-md-4">
+        <div class="box box-warning formulaire" style="margin-bottom: 100px; background-color: #e5e6e6; "></div>
+    </div>
+{% endblock %}

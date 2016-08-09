@@ -1,0 +1,72 @@
+{% extends ':sonata:standard_layout.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script language="JavaScript" type="text/javascript">
+        var wait = {{ cfg.waits }} * 1000;
+        var nbrbywait = {{ cfg.numberbywait }};
+        var total = {{ modelmailing.total }};
+        var rest = {{ modelmailing.process|length }};
+        var persent = 100 -( rest *100/total);
+        $(document).ready(function () {
+            draw(persent)
+             timer=setInterval("dojob()", wait);
+        });
+        function dojob() {
+            rest = rest - nbrbywait;
+            var newpersent = 100 -( rest *100/total);
+            if(newpersent>100){
+                draw(newpersent);
+                clearInterval(timer)
+            }else{
+                var urlajax = Routing.generate('admin_mailing_modelmailing_ajaxsend', { id: {{ modelmailing.id }} });
+                $.ajax({
+                    url: urlajax,
+                }).done(function(result) {
+                    if(result <= 0){
+                        draw(100);
+                    }else {
+                        draw(newpersent);
+                    }
+                    console.log( "done" );
+                });
+            }
+
+
+        }
+        function draw(persent){
+            $('.progress-bar').css('width',persent+'%');
+            $('.progress-bar').attr('aria-valuenow',persent);
+            $('.sr-only').html(persent +"%");
+        }
+    </script>
+{% endblock %}
+{% block sonata_admin_content %}
+
+
+    <div class="col-md-12">
+        <div id="cms-block-5726179c41c74" class="cms-block cms-block-element">
+
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Envoi des email</h3>
+                </div>
+                <div class="box-body">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info progress-bar-striped"
+                             role="progressbar" aria-valuenow="0"
+                             aria-valuemin="0" aria-valuemax="100"
+                             style="width: 0%">
+                            <span class="sr-only">0% </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="box-footer">
+                    <a href="" class="btn btn-danger pull-right">Stop</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
