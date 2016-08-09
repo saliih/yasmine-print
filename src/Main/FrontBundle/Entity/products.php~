@@ -1,0 +1,87 @@
+<?php
+
+namespace Main\FrontBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+
+/**
+ * products
+ *
+ * @ORM\Table(name="products")
+ * @ORM\Entity(repositoryClass="Main\FrontBundle\Repository\productsRepository")
+ */
+class products
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     */
+    private $name;
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="act", type="boolean")
+     */
+    private $act;
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="accostumiset", type="boolean")
+     */
+    private $costumise;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descript", type="text", nullable=true)
+     */
+    private $descript;
+    /**
+     * @ORM\ManyToOne(targetEntity="category", inversedBy="produits")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")
+     **/
+    private $category;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="picture",type="string", nullable=true)
+     */
+    private $picture;
+    protected $SERVER_PATH_TO_IMAGE_FOLDER = 'uploads/products';
+    public function upload()
+    {
+
+        // the file property can be empty if the field is not required
+        if (null === $this->getPicture()) {
+            return;
+        }
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and target filename as params
+        $this->getPicture()->move(
+            $this->SERVER_PATH_TO_IMAGE_FOLDER,
+            $this->getPicture()->getClientOriginalName()
+        );
+
+        // set the path property to the filename where you've saved the file
+        $this->picture = $this->getPicture()->getClientOriginalName();
+
+        // clean up the file property as you won't need it anymore
+        // $this->setBrochure(null);
+    }
+    public function __toString()
+    {
+        return $this->name;
+    }
+}

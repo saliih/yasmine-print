@@ -14,16 +14,20 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class CategoriesAdmin extends Admin
+class ProductsAdmin extends Admin
 {
     public function getname()
     {
-        return 'Catégories';
+        return 'Produits';
     }
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name', 'text', array("label" => "Nom de la catégorie"));
-        $formMapper->add('color', 'sonata_type_color_selector', array("label" => "Couleur de la catégorie"));
+        $formMapper->add('category');
+        $formMapper->add('name', 'text', array("label" => "Nom de produit"));
+        $formMapper->add('act', null, array("label" => "Active?",'required'=>false));
+        $formMapper->add('costumise', null, array("label" => "Personisable?",'required'=>false));
+        $formMapper->add('picture', 'file', array("label" => "Image", 'required'=>false,"data_class"=>null));
+        $formMapper->add('descript');
 
     }
 
@@ -35,9 +39,10 @@ class CategoriesAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add("color",null,array('template'=>'MainFrontBundle:Fields:color.html.twig'))
-            ->add("act",null,array( 'editable' => true))
+            ->add("picture",null,array('template'=>'MainFrontBundle:Fields:picture.html.twig'))
             ->addIdentifier("name")
+            ->add("category")
+            ->add("act",null,array( ))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
@@ -45,5 +50,13 @@ class CategoriesAdmin extends Admin
 
                 )));
     }
-
+    public function prePersist($object)
+    {
+        $object->upload();
+    }
+    public function preUpdate($object)
+    {
+        if(is_string($object->getPicture()) )
+        $object->upload();
+    }
 }

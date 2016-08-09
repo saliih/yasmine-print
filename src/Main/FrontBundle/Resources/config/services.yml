@@ -17,6 +17,11 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Catégorie des produits, group: Produithèque}
 
+    admin.produits:
+        class: Main\FrontBundle\Admin\ProductsAdmin
+        arguments: [~, Main\FrontBundle\Entity\products, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Produits, group: Produithèque}
 
 
 
@@ -32,5 +37,6 @@ services:
 
 
 
+# services utils
     Tools.utils:
         class: Main\FrontBundle\Services\ToolsServices

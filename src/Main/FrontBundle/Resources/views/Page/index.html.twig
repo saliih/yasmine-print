@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <div class="page-title">
+        <div class="container">
+            <h2 class="text-right text-uppercase">{{ page.name }}</h2>
+        </div>
+    </div>
+
+    <div class="container nos-produits">
+        <div class="row">
+            <div class="col-md-12">
+               {{ page.body|raw }}
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

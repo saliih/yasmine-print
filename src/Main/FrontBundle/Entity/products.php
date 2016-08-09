@@ -36,7 +36,7 @@ class products
     /**
      * @var bool
      *
-     * @ORM\Column(name="accostumiset", type="boolean")
+     * @ORM\Column(name="costumise", type="boolean")
      */
     private $costumise;
     /**
@@ -51,9 +51,52 @@ class products
      **/
     private $category;
     /**
+     * @var string
+     *
+     * @ORM\Column(name="picture",type="string", nullable=true)
+     */
+    private $picture;
+    protected $SERVER_PATH_TO_IMAGE_FOLDER = 'uploads/products';
+
+    public function __construct()
+    {
+        $this->act = false;
+        $this->costumise = false;
+    }
+
+    public function upload()
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->getPicture()) {
+            return;
+        }
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and target filename as params
+        if ($this->getPicture() instanceof Symfony\Component\HttpFoundation\File\UploadedFile) {
+            $this->getPicture()->move(
+                $this->SERVER_PATH_TO_IMAGE_FOLDER,
+                $this->getPicture()->getClientOriginalName()
+            );
+
+            // set the path property to the filename where you've saved the file
+            $this->picture = $this->getPicture()->getClientOriginalName();
+        }
+        // clean up the file property as you won't need it anymore
+        // $this->setBrochure(null);
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -70,6 +113,7 @@ class products
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -93,64 +137,18 @@ class products
     public function setAct($act)
     {
         $this->act = $act;
+
         return $this;
     }
 
     /**
      * Get act
      *
-     * @return bool
+     * @return boolean
      */
     public function getAct()
     {
         return $this->act;
-    }
-
-    /**
-     * Set descript
-     *
-     * @param string $descript
-     *
-     * @return products
-     */
-    public function setDescript($descript)
-    {
-        $this->descript = $descript;
-        return $this;
-    }
-
-    /**
-     * Get descript
-     *
-     * @return string
-     */
-    public function getDescript()
-    {
-        return $this->descript;
-    }
-
-    /**
-     * Set category
-     *
-     * @param \Main\FrontBundle\Entity\category $category
-     *
-     * @return products
-     */
-    public function setCategory(\Main\FrontBundle\Entity\category $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return \Main\FrontBundle\Entity\category
-     */
-    public function getCategory()
-    {
-        return $this->category;
     }
 
     /**
@@ -175,5 +173,77 @@ class products
     public function getCostumise()
     {
         return $this->costumise;
+    }
+
+    /**
+     * Set descript
+     *
+     * @param string $descript
+     *
+     * @return products
+     */
+    public function setDescript($descript)
+    {
+        $this->descript = $descript;
+
+        return $this;
+    }
+
+    /**
+     * Get descript
+     *
+     * @return string
+     */
+    public function getDescript()
+    {
+        return $this->descript;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return products
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Main\FrontBundle\Entity\category $category
+     *
+     * @return products
+     */
+    public function setCategory(\Main\FrontBundle\Entity\category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Main\FrontBundle\Entity\category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

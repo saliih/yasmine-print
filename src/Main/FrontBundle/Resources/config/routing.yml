@@ -1,3 +1,9 @@
 main_front_homepage:
     path:     /
     defaults: { _controller: MainFrontBundle:Default:index }
+pages_contenue:
+    path:     /yasmine-press/{slug}
+    defaults: { _controller: MainFrontBundle:Page:index }
+demande_devis:
+    path:     /yasmine-press/imprimerie/demandedevis
+    defaults: { _controller: MainFrontBundle:Page:devis }

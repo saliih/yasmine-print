@@ -47,16 +47,24 @@ class category
     {
         return $this->name;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
+
     /**
      * Set name
      *
@@ -67,10 +75,12 @@ class category
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
+
     /**
-     * Get nome
+     * Get name
      *
      * @return string
      */
@@ -78,6 +88,7 @@ class category
     {
         return $this->name;
     }
+
     /**
      * Set act
      *
@@ -88,17 +99,20 @@ class category
     public function setAct($act)
     {
         $this->act = $act;
+
         return $this;
     }
+
     /**
      * Get act
      *
-     * @return bool
+     * @return boolean
      */
     public function getAct()
     {
         return $this->act;
     }
+
     /**
      * Set color
      *
@@ -109,8 +123,10 @@ class category
     public function setColor($color)
     {
         $this->color = $color;
+
         return $this;
     }
+
     /**
      * Get color
      *
@@ -119,13 +135,6 @@ class category
     public function getColor()
     {
         return $this->color;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
