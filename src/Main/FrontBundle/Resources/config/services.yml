@@ -15,13 +15,8 @@ services:
         class: Main\FrontBundle\Admin\CategoriesAdmin
         arguments: [~, Main\FrontBundle\Entity\category, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Catégorie des produits, group: Produithèque}
-
-    admin.produits:
-        class: Main\FrontBundle\Admin\ProductsAdmin
-        arguments: [~, Main\FrontBundle\Entity\products, ~]
-        tags:
             - { name: sonata.admin, manager_type: orm, label: Produits, group: Produithèque}
+
 
     admin.formula:
         class: Main\FrontBundle\Admin\FormulaAdmin

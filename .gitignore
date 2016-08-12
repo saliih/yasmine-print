@@ -35,7 +35,7 @@
 
 # Composer PHAR
 /composer.phar
-
+*.php~
 .idea/
 composer.lock
 LICENSE

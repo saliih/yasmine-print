@@ -24,98 +24,98 @@ class formule
     /**
      * @var string
      *
-     * @ORM\Column(name="civ", type="string", length=20)
+     * @ORM\Column(name="civ", type="string", length=20, nullable=true)
      */
     private $civ;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pname", type="string", length=255)
+     * @ORM\Column(name="pname", type="string", length=255, nullable=true)
      */
     private $pname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="string", length=255)
+     * @ORM\Column(name="adress", type="string", length=255, nullable=true)
      */
     private $adress;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cp", type="string", length=10)
+     * @ORM\Column(name="cp", type="string", length=10, nullable=true)
      */
     private $cp;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=255)
+     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
      */
     private $ville;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Pays", type="string", length=255)
+     * @ORM\Column(name="Pays", type="string", length=255, nullable=true)
      */
     private $pays;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datenaisse", type="date")
+     * @ORM\Column(name="datenaisse", type="date", nullable=true)
      */
     private $datenaisse;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="profession", type="string", length=255)
+     * @ORM\Column(name="profession", type="string", length=255, nullable=true)
      */
     private $profession;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tel", type="string", length=45)
+     * @ORM\Column(name="tel", type="string", length=45, nullable=true)
      */
     private $tel;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="sweb", type="string", length=255)
+     * @ORM\Column(name="sweb", type="string", length=255, nullable=true)
      */
     private $sweb;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="besoin", type="string", length=100)
+     * @ORM\Column(name="besoin", type="string", length=100, nullable=true)
      */
     private $besoin;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="msg", type="text")
+     * @ORM\Column(name="msg", type="text", nullable=true)
      */
     private $msg;
 

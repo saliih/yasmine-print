@@ -187,4 +187,3 @@ class contact
         return $this->gsm;
     }
 }
-

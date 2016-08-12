@@ -10,3 +10,6 @@ demande_devis:
 form_contact:
     path:     /yasmine-press/imprimerie/contact
     defaults: { _controller: MainFrontBundle:Page:contact }
+boutique:
+    path:     /yasminepress/boutique
+    defaults: { _controller: MainFrontBundle:Products:index }

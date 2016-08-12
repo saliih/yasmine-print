@@ -38,22 +38,59 @@ class category
      * @ORM\Column(name="color", type="string", length=12)
      */
     private $color;
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="costumise", type="boolean")
+     */
+    private $costumise;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descript", type="text", nullable=true)
+     */
+    private $descript;
 
     /**
-     * @ORM\OneToMany(targetEntity="products", mappedBy="category", cascade={"persist"})
+     * @var string
+     *
+     * @ORM\Column(name="picture",type="string", nullable=true)
      */
-    private $produits;
+    private $picture;
+    protected $SERVER_PATH_TO_IMAGE_FOLDER = 'uploads/products';
     public function __toString()
     {
         return $this->name;
     }
-    /**
-     * Constructor
-     */
     public function __construct()
     {
-        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->act = false;
+        $this->costumise = false;
     }
+
+    public function upload()
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->getPicture()) {
+            return;
+        }
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and target filename as params
+        $this->getPicture()->move(
+            $this->SERVER_PATH_TO_IMAGE_FOLDER,
+            $this->getPicture()->getClientOriginalName()
+        );
+
+        // set the path property to the filename where you've saved the file
+        $this->picture = $this->getPicture()->getClientOriginalName();
+
+        // clean up the file property as you won't need it anymore
+        // $this->setBrochure(null);
+    }
+
 
     /**
      * Get id
@@ -138,36 +175,74 @@ class category
     }
 
     /**
-     * Add produit
+     * Set costumise
      *
-     * @param \Main\FrontBundle\Entity\products $produit
+     * @param boolean $costumise
      *
      * @return category
      */
-    public function addProduit(\Main\FrontBundle\Entity\products $produit)
+    public function setCostumise($costumise)
     {
-        $this->produits[] = $produit;
+        $this->costumise = $costumise;
 
         return $this;
     }
 
     /**
-     * Remove produit
+     * Get costumise
      *
-     * @param \Main\FrontBundle\Entity\products $produit
+     * @return boolean
      */
-    public function removeProduit(\Main\FrontBundle\Entity\products $produit)
+    public function getCostumise()
     {
-        $this->produits->removeElement($produit);
+        return $this->costumise;
     }
 
     /**
-     * Get produits
+     * Set descript
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @param string $descript
+     *
+     * @return category
      */
-    public function getProduits()
+    public function setDescript($descript)
     {
-        return $this->produits;
+        $this->descript = $descript;
+
+        return $this;
+    }
+
+    /**
+     * Get descript
+     *
+     * @return string
+     */
+    public function getDescript()
+    {
+        return $this->descript;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return category
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
     }
 }
