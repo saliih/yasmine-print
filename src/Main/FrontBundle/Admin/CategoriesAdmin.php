@@ -13,6 +13,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Admin\AdminInterface;
+use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class CategoriesAdmin extends Admin
 {
@@ -62,6 +64,27 @@ class CategoriesAdmin extends Admin
 
                 )));
     }
+
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    {
+        if (!$childAdmin && !in_array($action, array('edit', 'show'))) {
+            return;
+        }
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+        $id = $admin->getRequest()->get('id');
+
+        $menu->addChild('Produits', array('uri' => $admin->generateUrl('edit', array('id' => $id))));
+        $menu->addChild('Liste des template', array('uri' => $admin->generateUrl('admin.tplprod.list', array('id' => $id))))
+            ->setAttribute('icon', 'fa fa-list');
+        /*$menu->addChild('Tarifs', array('uri' => $admin->generateUrl('admin.period.list', array('id' => $id))))
+            ->setAttribute('icon', 'fa fa-money');
+        $menu->addChild('Photos des chambres', array('uri' => $admin->generateUrl('admin.roomimg.list', array('id' => $id))))
+            ->setAttribute('icon', 'fa fa-camera');*/
+
+    }
+
+
     public function prePersist($object)
     {
         $this->updateFreign($object);

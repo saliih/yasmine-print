@@ -19,8 +19,9 @@
                     </div>
 
                     <div class="social text-center">
-                        <div class="facebook-icon" aria-hidden="true"></div>
-                        <div class="insta-icon" aria-hidden="true"></div>
+                        {% for item in social %}
+                        <a href="{{ item.link }}" class="{{ item.icon }}" aria-hidden="true"></a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

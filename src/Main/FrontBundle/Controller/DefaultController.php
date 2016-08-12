@@ -8,10 +8,12 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+        $products = $this->getDoctrine()->getRepository('MainFrontBundle:category')->findBy(array('act' => true));
         $banner = $this->getDoctrine()->getRepository('MainFrontBundle:banner')->findBy(array(),array("ord"=>"ASC"));
         return $this->render('MainFrontBundle:Default:index.html.twig',
             array(
-                'banner'=>$banner
+                'banner'=>$banner,
+                'products' => $products
             ));
     }
 
@@ -30,6 +32,7 @@ class DefaultController extends Controller
 
     public function footerAction()
     {
-        return $this->render('MainFrontBundle:Default:footer.html.twig');
+        $social = $this->getDoctrine()->getRepository('MainFrontBundle:social')->findBy(array(),array('ord'=>'ASC'));
+        return $this->render('MainFrontBundle:Default:footer.html.twig',array('social'=>$social));
     }
 }

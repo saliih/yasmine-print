@@ -30,7 +30,7 @@
             Sed feugiat laoreet gravida. Donec nec nisl lacus. Integer at adipiscing purus, vitae porttitor risus.
         </p>
 
-        <a href="#" class="btn btn-green text-uppercase" type="a">
+        <a href="{{ path('pages_contenue',{slug:'qui-sommes-nous'}) }}" class="btn btn-green text-uppercase" type="a">
             Lire la suite
         </a>
 
@@ -43,12 +43,34 @@
                 Praesent eget ultricies leo. Donec eu aliquam ipsum. Proin suscipit venenatis arcu, ut cursus sapien interdum vitae. Aliquam erat volutpat. Vivamus et dapibus lacus. Suspendisse eget augue eleifend, sodales lectus sit amet, adipiscing ante.
                 Nulla mattis, magna ac pellentesque condimentum, elit urna pulvinar magna, nec iaculis neque
             </p>
-            <div class="owl-carousel-control">
+            <!--<div class="owl-carousel-control">
                 <a class="btn prev glyphicon glyphicon-chevron-left"></a>
                 <a class="btn next glyphicon glyphicon-chevron-right"></a>
+            </div>-->
+            <div class=" nos-produits">
+                <div class="row">
+                    {% for item in products %}
+                        <div class="col-md-3">
+                            <div class="item">
+                                {% set slug = item.name|slugifier %}
+                                <a href="{{ path('boutique_detail',{id:item.id,slug:slug}) }}">
+                                    <img src="{{ asset('uploads/products/'~item.picture) }}" alt="Image">
+                                    <div class="item-content " style="background: {{ item.color }}">{{ item.name }}</div>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <!-- <div class="row load-more">
+                     <button class="btn btn-default" type="button">
+                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                     </button>
+                 </div>-->
             </div>
+
         </div>
+
     </div>
 
-    <div class="carousel-multi">
 {% endblock %}

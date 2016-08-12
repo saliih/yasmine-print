@@ -11,11 +11,19 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Pages de contenu, group: Contenu}
 
+    admin.social:
+        class: Main\FrontBundle\Admin\SocialAdmin
+        arguments: [~, Main\FrontBundle\Entity\social, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Réseaux sociaux, group: Contenu}
+
     admin.categories:
         class: Main\FrontBundle\Admin\CategoriesAdmin
         arguments: [~, Main\FrontBundle\Entity\category, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Produits, group: Produithèque}
+        calls:
+            - [addChild, ['@admin.tplprod']]
     admin.plis:
         class: Main\FrontBundle\Admin\PlisAdmin
         arguments: [~, Main\FrontBundle\Entity\plis, ~]
@@ -26,7 +34,18 @@ services:
         arguments: [~, Main\FrontBundle\Entity\prodoptions, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, show_in_dashboard: false}
-
+    admin.paramtpl:
+        class: Main\FrontBundle\Admin\ParamtplAdmin
+        arguments: [~, Main\FrontBundle\Entity\paramtpl, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false}
+    admin.tplprod:
+        class: Main\FrontBundle\Admin\TplprodAdmin
+        arguments: [~, Main\FrontBundle\Entity\tplprod, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false}
+        calls:
+            - [ setTemplate, [edit, MainFrontBundle:tplprod:edit.html.twig]]
 
     admin.formula:
         class: Main\FrontBundle\Admin\FormulaAdmin
@@ -39,6 +58,14 @@ services:
         arguments: [~, Main\FrontBundle\Entity\contact, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Contact, group: Feedback,  icon: '<i class="fa fa-archive"></i>'}
+
+
+
+    admin.client:
+        class: Main\FrontBundle\Admin\ClientAdmin
+        arguments: [~, Main\FrontBundle\Entity\client, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Réservation, group: Feedback,  icon: '<i class="fa fa-archive"></i>'}
 
 
 

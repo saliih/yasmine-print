@@ -16,3 +16,6 @@ boutique:
 boutique_detail:
     path:     /yasminepress/boutique/{id}/{slug}/
     defaults: { _controller: MainFrontBundle:Products:detail }
+submit_details:
+    path:     /submitdetails
+    defaults: { _controller: MainFrontBundle:Caddy:submitdetails }

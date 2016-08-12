@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+{% form_theme form 'form_table_layout2.html.twig' %}
+{% block body %}
+    <div class="page-title">
+        <div class="container">
+            <h2 class="text-right text-uppercase">Valider Votre commande</h2>
+        </div>
+    </div>
+
+    <div class="container nos-produits">
+        <div class="row">
+            <div class="col-md-6">
+                {% for type, flashMessages in app.session.flashbag.all() %}
+                    {% for flashMessage in flashMessages %}
+                        <div class="mdi-alert-warning">{{ flashMessage|trans }}</div>
+                    {% endfor %}
+                {% endfor %}
+                {{ form_start(form, {'method': 'POST','attr': {'class': 'col-md-12'}}) }}
+
+                {{ form_row(form.name) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.gsm) }}
+                {{ form_row(form.adresse) }}
+                <div class="clearfix"></div>
+                <div class="form-actions">
+                    <button class="btn btn-inverse" type="submit">Valider</button>
+                    <button class="btn">Cancel</button>
+                </div>
+                {{ form_widget(form._token) }}
+                {{ form_end(form) }}
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+{% endblock %}

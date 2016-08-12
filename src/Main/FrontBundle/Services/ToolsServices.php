@@ -17,6 +17,14 @@ class ToolsServices
     {
         $this->container = $container;
     }*/
+    public function dump($object, $test = true)
+    {
+        echo "<pre>";
+        print_r($object);
+        echo "</pre>";
+        if ($test) exit;
+    }
+
     public function slugify($text)
     {
         // replace non letter or digits by -

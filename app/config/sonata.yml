@@ -1,6 +1,8 @@
 sonata_admin:
     title:      "Yasmine Press"
     title_logo: /public/images/logo.png
+    templates:
+            layout:               :Sonata:standard_layout.html.twig
 sonata_block:
     default_contexts: [cms]
     blocks:
