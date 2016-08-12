@@ -16,6 +16,16 @@ services:
         arguments: [~, Main\FrontBundle\Entity\category, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Produits, group: Produithèque}
+    admin.plis:
+        class: Main\FrontBundle\Admin\PlisAdmin
+        arguments: [~, Main\FrontBundle\Entity\plis, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Type des plis, group: Produithèque}
+    admin.prodoptions:
+        class: Main\FrontBundle\Admin\ProdoptionsAdmin
+        arguments: [~, Main\FrontBundle\Entity\prodoptions, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false}
 
 
     admin.formula:

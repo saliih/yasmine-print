@@ -20,101 +20,15 @@
             {% for item in products %}
             <div class="col-md-3">
                 <div class="item">
-                    <a href="produit.html">
+                    {% set slug = item.name|slugifier %}
+                    <a href="{{ path('boutique_detail',{id:item.id,slug:slug}) }}">
                         <img src="{{ asset('uploads/products/'~item.picture) }}" alt="Image">
                         <div class="item-content " style="background: {{ item.color }}">{{ item.name }}</div>
                     </a>
                 </div>
             </div>
                 {% endfor %}
-           {# <div class="col-md-3">
-                <div class="item">
-                    <a href="produit.html">
-                        <img src="images/carousel/carousel-2.png" alt="Image">
-                        <div class="item-content plv">plv</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="item">
-                    <a href="produit.html">
-                        <img src="images/carousel/carousel-3.png" alt="Image">
-                        <div class="item-content depliant">dépliant</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="item">
-                    <a href="produit.html">
-                        <img src="images/carousel/carousel-4.png" alt="Image">
-                        <div class="item-content flyer">Flyer</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="item">
-                    <a href="produit.html">
-                        <img src="images/carousel/carousel-5.png" alt="Image">
-                        <div class="item-content papier-entete">Papier Entête</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="item">
-                    <a href="produit.html">
-                        <img src="images/carousel/carousel-6.png" alt="Image">
-                        <div class="item-content cartes-visite">Cartes de Visite</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="item">
-                    <a href="produit.html">
-                        <img src="images/carousel/carousel-1.png" alt="Image">
-                        <div class="item-content porte-documents">Porte Documents</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="item">
-                    <a href="produit.html">
-                        <img src="images/carousel/carousel-2.png" alt="Image">
-                        <div class="item-content plv">plv</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="item">
-                    <a href="produit.html">
-                        <img src="images/carousel/carousel-3.png" alt="Image">
-                        <div class="item-content depliant">dépliant</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="item">
-                    <a href="produit.html">
-                        <img src="images/carousel/carousel-4.png" alt="Image">
-                        <div class="item-content flyer">Flyer</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="item">
-                    <a href="produit.html">
-                        <img src="images/carousel/carousel-5.png" alt="Image">
-                        <div class="item-content papier-entete">Papier Entête</div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="item">
-                    <a href="produit.html">
-                        <img src="images/carousel/carousel-6.png" alt="Image">
-                        <div class="item-content cartes-visite">Cartes de Visite</div>
-                    </a>
-                </div>
-            </div>#}
+
         </div>
        <!-- <div class="row load-more">
             <button class="btn btn-default" type="button">

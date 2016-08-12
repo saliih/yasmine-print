@@ -1,0 +1,91 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('main_front_homepage') }}">Accueil</a></li>
+            <li><a href="{{ path('boutique') }}">Nos Produits</a></li>
+            <li class="active">{{ product.name }}</li>
+        </ol>
+    </div>
+
+    <div class="page-title">
+        <div class="container">
+            <h2 class="text-right text-uppercase"><b style="color:{{ product.color }}">{{ product.name }}</b></h2>
+        </div>
+    </div>
+
+    <div class="container produit-page">
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="products-menu">
+                    {% for item in products %}
+                        {% set slug = item.name|slugifier %}
+                        <li><a href="{{ path('boutique_detail',{id:item.id,slug:slug}) }}"
+                               style="background: {{ item.color }};">{{ item.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-9 produit-content">
+
+                <div id="carousel-product-page" class="owl-carousel owl-theme">
+
+                    <div class="item"><img src="{{ asset('public/images/carousel/carousel-1.png') }}" alt="Image"></div>
+                    <div class="item"><img src="{{ asset('public/images/carousel/carousel-2.png') }}" alt="Image"></div>
+                    <div class="item"><img src="{{ asset('public/images/carousel/carousel-3.png') }}" alt="Image"></div>
+                    <div class="item"><img src="{{ asset('public/images/carousel/carousel-1.png') }}" alt="Image"></div>
+                    <div class="item"><img src="{{ asset('public/images/carousel/carousel-2.png') }}" alt="Image"></div>
+                    <div class="item"><img src="{{ asset('public/images/carousel/carousel-3.png') }}" alt="Image"></div>
+                </div>
+                <div class="row">
+                    <div class="owl-carousel-control">
+                        <a class="btn prev glyphicon glyphicon-chevron-left btn-green"></a>
+                        <a class="btn next glyphicon glyphicon-chevron-right btn-green"></a>
+                    </div>
+                </div>
+
+                <p class="description">
+                    {{ product.descript|raw }}
+                </p>
+                {% if product.plis|length>0 %}
+                    <div class="wall">
+                        <div class="wall-title">
+                            Type des plis
+                        </div>
+                        <div class="row">
+                            {% for item in product.plis %}
+                                <div class="col-md-2">
+                                    <div class="wall-item" data-value="{{ item.id }}">
+                                        <img src="{{ asset('uploads/plis/'~item.image) }}">
+                                        <div>{{ item.name }}</div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="wall">
+                            <div class="wall-title">
+                                Options
+                            </div>
+                            <div class="row">
+                                {% for item in product.options %}
+                                <div class="col-md-12">
+                                    <div class="checkbox"><label><input name="opt" value="{{ item.price }}" type="radio"{% if item.active %} checked="checked"{% endif %} />{{ item.name }} ({{ item.price }} TND)</label></div>
+
+                                </div>
+                                    {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

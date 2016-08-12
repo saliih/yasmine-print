@@ -29,6 +29,18 @@ class CategoriesAdmin extends Admin
         $formMapper->add('picture', 'file', array("label" => "Image", 'required'=>false,"data_class"=>null));
         $formMapper->add('descript');
         $formMapper->end();
+        $formMapper->with('&nbsp;&nbsp;',array('class'=>'col-md-4'));
+        $formMapper->add('plis',null,array('required' => false, 'expanded' => true, 'mapped' => true, "multiple" => true,));
+        $formMapper->end();
+        $formMapper->with('Options')
+            ->add('options', 'sonata_type_collection', array(
+                'by_reference' => false
+            ), array(
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+            ))->end();
+
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -52,10 +64,17 @@ class CategoriesAdmin extends Admin
     }
     public function prePersist($object)
     {
+        $this->updateFreign($object);
         $object->upload();
+    }
+    private function updateFreign($object){
+        foreach($object->getOptions() as $opt){
+            $opt->setCategory($object);
+        }
     }
     public function preUpdate($object)
     {
+        $this->updateFreign($object);
         $object->upload();
     }
 

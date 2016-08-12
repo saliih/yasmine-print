@@ -26,7 +26,12 @@ class AppExtension extends \Twig_Extension
         return array(
             'criptidmailing' => new \Twig_Filter_Method($this, 'criptidmailing'),
             'changeurl' => new \Twig_Filter_Method($this, 'changeurl'),
+            'slugifier' => new \Twig_Filter_Method($this, 'slugifier'),
         );
+    }
+    public function slugifier($str){
+        $service = $this->container->get('tools.utils');
+        return $service->slugify($str);
     }
     public function criptidmailing($id){
         return base64_encode($id*58741);

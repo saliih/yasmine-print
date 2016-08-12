@@ -13,3 +13,6 @@ form_contact:
 boutique:
     path:     /yasminepress/boutique
     defaults: { _controller: MainFrontBundle:Products:index }
+boutique_detail:
+    path:     /yasminepress/boutique/{id}/{slug}/
+    defaults: { _controller: MainFrontBundle:Products:detail }

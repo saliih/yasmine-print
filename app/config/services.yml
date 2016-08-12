@@ -4,3 +4,8 @@ parameters:
 #    parameter_name: value
 
 services:
+    mailingbundle.twig_extension:
+        class: MailingBundle\Twig\AppExtension
+        arguments: [@service_container]
+        tags:
+            - { name: twig.extension }

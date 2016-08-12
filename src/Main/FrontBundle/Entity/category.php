@@ -57,6 +57,18 @@ class category
      * @ORM\Column(name="picture",type="string", nullable=true)
      */
     private $picture;
+    /**
+     * @ORM\ManyToMany(targetEntity="plis", inversedBy="category" , cascade={"persist"})
+     * @ORM\JoinTable(name="categories_plis",
+     *      joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="plis_id", referencedColumnName="id",nullable=true)}
+     *      )
+     */
+    private $plis;
+    /**
+     * @ORM\OneToMany(targetEntity="prodoptions", mappedBy="category", cascade={"persist"})
+     */
+    private $options;
     protected $SERVER_PATH_TO_IMAGE_FOLDER = 'uploads/products';
     public function __toString()
     {
@@ -244,5 +256,73 @@ class category
     public function getPicture()
     {
         return $this->picture;
+    }
+
+    /**
+     * Add pli
+     *
+     * @param \Main\FrontBundle\Entity\plis $pli
+     *
+     * @return category
+     */
+    public function addPli(\Main\FrontBundle\Entity\plis $pli)
+    {
+        $this->plis[] = $pli;
+
+        return $this;
+    }
+
+    /**
+     * Remove pli
+     *
+     * @param \Main\FrontBundle\Entity\plis $pli
+     */
+    public function removePli(\Main\FrontBundle\Entity\plis $pli)
+    {
+        $this->plis->removeElement($pli);
+    }
+
+    /**
+     * Get plis
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPlis()
+    {
+        return $this->plis;
+    }
+
+    /**
+     * Add option
+     *
+     * @param \Main\FrontBundle\Entity\prodoptions $option
+     *
+     * @return category
+     */
+    public function addOption(\Main\FrontBundle\Entity\prodoptions $option)
+    {
+        $this->options[] = $option;
+
+        return $this;
+    }
+
+    /**
+     * Remove option
+     *
+     * @param \Main\FrontBundle\Entity\prodoptions $option
+     */
+    public function removeOption(\Main\FrontBundle\Entity\prodoptions $option)
+    {
+        $this->options->removeElement($option);
+    }
+
+    /**
+     * Get options
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 }
