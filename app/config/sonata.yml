@@ -1,6 +1,48 @@
 sonata_admin:
     title:      "Yasmine Press"
     title_logo: /public/images/logo.png
+
+    dashboard:
+        blocks:
+            # display a dashboard block
+            - { position: right,  type: sonata.admin.block.admin_list, settings: { groups: [utilisateur, Mailing] } }
+            - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [Produits, FeedBack, Contenue] } }
+        groups:
+            Contenue:
+                label: Contenue
+                icon: '<i class="fa fa-file-text" aria-hidden="true"></i>'
+                items:
+                    - admin.pages
+                    - admin.social
+            Produits:
+                label: Produits
+                icon: '<i class="fa fa-product-hunt" aria-hidden="true"></i>'
+                items:
+                    - admin.categories
+                    - admin.plis
+            FeedBack:
+                label: FeedBack
+                icon: '<i class="fa fa-archive" aria-hidden="true"></i>'
+                items:
+                    - admin.formula
+                    - admin.contact
+                    - admin.client
+            Mailing:
+                label: Mailing
+                icon: '<i class="fa fa-home"></i>'
+                items:
+                    - admin.template
+                    - admin.mailinglist
+                    - admin.mailinglisttest
+                    - admin.mailingcfg
+            utilisateur:
+                label: Users
+                icon: '<i class="fa fa-users"></i>'
+                items:
+                    - sonata.user.admin.user
+                    - sonata.user.admin.group
+
+
     templates:
             layout:               :Sonata:standard_layout.html.twig
 sonata_block:

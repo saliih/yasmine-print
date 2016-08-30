@@ -73,6 +73,11 @@ class category
      * @ORM\OneToMany(targetEntity="tplprod", mappedBy="category", cascade={"persist"})
      */
     private $tplprod;
+    /**
+     * @ORM\OneToMany(targetEntity="prodimg", mappedBy="category", cascade={"persist"})
+     */
+    private $prodimg;
+
     protected $SERVER_PATH_TO_IMAGE_FOLDER = 'uploads/products';
     public function __toString()
     {
@@ -362,5 +367,39 @@ class category
     public function getTplprod()
     {
         return $this->tplprod;
+    }
+
+    /**
+     * Add prodimg
+     *
+     * @param \Main\FrontBundle\Entity\prodimg $prodimg
+     *
+     * @return category
+     */
+    public function addProdimg(\Main\FrontBundle\Entity\prodimg $prodimg)
+    {
+        $this->prodimg[] = $prodimg;
+
+        return $this;
+    }
+
+    /**
+     * Remove prodimg
+     *
+     * @param \Main\FrontBundle\Entity\prodimg $prodimg
+     */
+    public function removeProdimg(\Main\FrontBundle\Entity\prodimg $prodimg)
+    {
+        $this->prodimg->removeElement($prodimg);
+    }
+
+    /**
+     * Get prodimg
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProdimg()
+    {
+        return $this->prodimg;
     }
 }

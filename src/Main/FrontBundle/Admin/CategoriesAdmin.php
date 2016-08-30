@@ -28,7 +28,7 @@ class CategoriesAdmin extends Admin
         $formMapper->add('name', 'text', array("label" => "Nom de la catégorie"));
         $formMapper->add('color', 'text', array("label" => "Couleur de la catégorie"));//sonata_type_color_selector
         $formMapper->add('costumise', null, array("label" => "Personisable?",'required'=>false));
-        $formMapper->add('picture', 'file', array("label" => "Image", 'required'=>false,"data_class"=>null));
+        $formMapper->add('picture', null, array("label" => "Image", 'required'=>false));
         $formMapper->add('descript');
         $formMapper->end();
         $formMapper->with('&nbsp;&nbsp;',array('class'=>'col-md-4'));
@@ -77,6 +77,8 @@ class CategoriesAdmin extends Admin
         $menu->addChild('Produits', array('uri' => $admin->generateUrl('edit', array('id' => $id))));
         $menu->addChild('Liste des template', array('uri' => $admin->generateUrl('admin.tplprod.list', array('id' => $id))))
             ->setAttribute('icon', 'fa fa-list');
+       $menu->addChild('Liste des images', array('uri' => $admin->generateUrl('admin.prodimg.list', array('id' => $id))))
+            ->setAttribute('icon', 'fa fa-picture-o');
         /*$menu->addChild('Tarifs', array('uri' => $admin->generateUrl('admin.period.list', array('id' => $id))))
             ->setAttribute('icon', 'fa fa-money');
         $menu->addChild('Photos des chambres', array('uri' => $admin->generateUrl('admin.roomimg.list', array('id' => $id))))

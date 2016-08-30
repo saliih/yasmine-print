@@ -43,10 +43,10 @@ class ClientAdmin extends Admin
             ->add('gsm')
             ->add('adresse')
             ->add('category')
-            ->add('plis')
-            ->add('option')
-            ->add('template')
-            ->add('caddy')
+           // ->add('plis')
+           // ->add('option')
+          //  ->add('template')
+           // ->add('caddy')
         ;
     }
 
@@ -54,13 +54,13 @@ class ClientAdmin extends Admin
     {
         // to remove a single route
         $collection->remove('create');
-        $collection->remove('delete');
+       // $collection->remove('delete');
     }
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier("name")
-            ->add("subject")
+            ->addIdentifier("name",null,array('label'=>'Client'))
+            ->add("dcr")
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
