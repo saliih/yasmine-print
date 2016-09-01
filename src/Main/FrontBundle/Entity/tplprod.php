@@ -3,7 +3,16 @@
 namespace Main\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation;
+use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\PreSerialize;
+use JMS\Serializer\Annotation\PostSerialize;
+use JMS\Serializer\Annotation\PostDeserialize;
+use JMS\Serializer\Annotation\Type;
 /**
  * tplprod
  *
@@ -18,6 +27,7 @@ class tplprod
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -25,6 +35,7 @@ class tplprod
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @Expose
      */
     private $name;
 
@@ -32,8 +43,15 @@ class tplprod
      * @var string
      *
      * @ORM\Column(name="bg", type="string", length=255, nullable=true)
+     * @Expose
      */
     private $bg;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pdf", type="string", length=255, nullable=true)
+     */
+    private $pdf;
 
     /**
      * @ORM\ManyToOne(targetEntity="category", inversedBy="tplprod")
@@ -172,5 +190,29 @@ class tplprod
     public function getParameters()
     {
         return $this->parameters;
+    }
+
+    /**
+     * Set pdf
+     *
+     * @param string $pdf
+     *
+     * @return tplprod
+     */
+    public function setPdf($pdf)
+    {
+        $this->pdf = $pdf;
+
+        return $this;
+    }
+
+    /**
+     * Get pdf
+     *
+     * @return string
+     */
+    public function getPdf()
+    {
+        return $this->pdf;
     }
 }

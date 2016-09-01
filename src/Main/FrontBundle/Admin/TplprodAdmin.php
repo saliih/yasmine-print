@@ -32,6 +32,7 @@ class TplprodAdmin extends Admin
     {
         $formMapper->add('bg', 'text', array("label" => "Fichier", 'required' => false));
         $formMapper->add('name', 'text', array("label" => "Nom de Fichier"));
+        $formMapper->add('pdf', 'text', array("label" => "Fichier Pdf"));
         $formMapper->add('parameters', 'sonata_type_collection', array(
             'by_reference' => false
         ), array(
@@ -51,6 +52,7 @@ class TplprodAdmin extends Admin
         $listMapper
             ->add("bg", null, array('template' => 'MainFrontBundle:Fields:imgtplprod.html.twig'))
             ->add("name")
+            ->add("pdf")
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),

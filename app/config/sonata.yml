@@ -5,7 +5,7 @@ sonata_admin:
     dashboard:
         blocks:
             # display a dashboard block
-            - { position: right,  type: sonata.admin.block.admin_list, settings: { groups: [utilisateur, Mailing] } }
+            - { position: right,  type: sonata.admin.block.admin_list, settings: { groups: [utilisateur, Mailing, Template] } }
             - { position: left,  type: sonata.admin.block.admin_list, settings: { groups: [Produits, FeedBack, Contenue] } }
         groups:
             Contenue:

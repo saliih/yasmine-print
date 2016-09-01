@@ -110,3 +110,27 @@ white_october_breadcrumbs:
 
 fos_js_routing:
     routes_to_expose: [ admin_mailing_modelmailing_ajaxsend ]
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: false
+    format_listener: false
+    view:
+        jsonp_handler:
+            callback_param:       true
+        view_response_listener: 'force'
+        formats:
+            json : true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+    routing_loader:
+        default_format: json
+        include_format: false
+    exception:
+        enabled: true
+        messages:
+            Symfony\Component\HttpKernel\Exception\BadRequestHttpException: true
