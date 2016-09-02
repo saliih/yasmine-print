@@ -28,6 +28,7 @@ class ParamtplAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $formMapper->add('name');
         $formMapper->add('type', 'choice', array(
             'placeholder' => 'choisisser un type',
             'choices' => array(

@@ -22,6 +22,12 @@ class paramtpl
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", nullable=true)
+     */
+    private $name;
+    /**
      * @var float
      *
      * @ORM\Column(name="x1", type="float", nullable=true)
@@ -339,5 +345,21 @@ class paramtpl
     public function getColor()
     {
         return $this->color;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 }

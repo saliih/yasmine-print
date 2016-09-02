@@ -46,7 +46,7 @@ sonata_user_change_password:
 
 
 #REST
-rest :
-  type : rest
-  resource: "@MainFrontBundle/Resources/config/routing_rest.yml"
-  prefix : /api
+#rest :
+#  type : rest
+#  resource: "@MainFrontBundle/Resources/config/routing_rest.yml"
+#  prefix : /api

@@ -272,3 +272,6 @@ ul.list-inline.footer-adress{margin:0}
 .produit-content .wall .wall-item{text-align:center;cursor:pointer;border:3px solid transparent}
 .produit-content .wall .wall-item:hover{border:3px solid #f7941d}
 .produit-content .wall .wall-item div{color:#a7a4a4;font-size:12px;padding-top:15px;}
+.modal-dialog{
+    width: 900px!important;
+}

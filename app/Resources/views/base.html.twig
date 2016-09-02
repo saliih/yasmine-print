@@ -12,6 +12,9 @@
 {% block body %}{% endblock %}
 {{ render(controller('MainFrontBundle:Default:footer')) }}
 <script src="{{ asset('public/js/jquery.min.js') }}"></script>
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
 <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('public/owl-carousel/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('public/js/script.js') }}"></script>

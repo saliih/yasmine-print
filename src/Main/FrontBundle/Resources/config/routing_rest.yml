@@ -1,3 +1,0 @@
-template:
-    type:     rest
-    resource: Main\FrontBundle\Controller\Rest\TemplateController
