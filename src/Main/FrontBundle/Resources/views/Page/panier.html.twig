@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <div class="page-title">
+        <div class="container">
+            <h2 class="text-right text-uppercase">Panier</h2>
+        </div>
+    </div>
+
+    <div class="container nos-produits">
+    <div class="row">
+    <div class="col-md-12">
+        {% if panier|length>0 %}
+    <table class="table table-striped">
+    <thead>
+    <tr>
+        <td>Image</td>
+        <td>Produit</td>
+        <td>Prix</td>
+        <td></td>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% set total = 0 %}
+        {% for key,item in panier %}
+            {% set product = item['prod'] %}
+            {% set plis = item['plis'] %}
+            {% set opt = item['opt'] %}
+            {% set total = total + opt %}
+            <tr>
+                <td align="center"><img src="{{ asset(product.picture) }}" width="150"/></td>
+                <td>{{ product.name }}</td>
+                <td>{{ opt }} <sup>DT</sup></td>
+                <td><a href="{{ path('panier_delete',{id: product.id}) }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td></td>
+            <th>Total :</th>
+            <td>{{ total }} <sup>DT</sup></td>
+        </tr>
+        </tfoot>
+        </table>
+        <a href="#" class="btn caddybt pull-right">Passer la commande</a>
+        {% else %}
+
+    Panier Vide{% endif %}        </div>
+        <div class="col-md-6">
+
+        </div>
+        </div>
+
+        </div>
+
+        </div>
+
+        {% endblock %}

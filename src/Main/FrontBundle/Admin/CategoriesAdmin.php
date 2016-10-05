@@ -31,8 +31,8 @@ class CategoriesAdmin extends Admin
         $formMapper->add('picture', null, array("label" => "Image", 'required'=>false));
         $formMapper->add('descript');
         $formMapper->end();
-        $formMapper->with('&nbsp;&nbsp;',array('class'=>'col-md-4'));
-        $formMapper->add('plis',null,array('required' => false, 'expanded' => true, 'mapped' => true, "multiple" => true,));
+        $formMapper->with('Type des Plis',array('class'=>'col-md-4'));
+        $formMapper->add('plis',null,array('required' => false, 'expanded' => true, 'mapped' => true, "multiple" => true,"label"=>false));
         $formMapper->end();
         $formMapper->with('Options')
             ->add('options', 'sonata_type_collection', array(

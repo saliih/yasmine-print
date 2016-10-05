@@ -275,3 +275,21 @@ ul.list-inline.footer-adress{margin:0}
 .modal-dialog{
     width: 900px!important;
 }
+.boxSubmit h5{
+    text-align: center;
+    line-height: 50px;
+    font-family:Open Sans;
+    font-size: 32px;
+}
+.boxSubmit h6{
+    color: #f57133;
+    font-family:Open Sans;
+    font-size: 35px;
+    text-align: center;
+}
+.caddybt, .caddybt:hover{
+    color: #fff;
+    background-color: #f57133;
+    border-color: #f57133;
+    margin: 15px 70px;
+}

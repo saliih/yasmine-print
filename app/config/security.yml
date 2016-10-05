@@ -41,13 +41,7 @@ security:
                 path:           /admin/logout
             anonymous:    true
 
-        api:
-            pattern:   /api/(.*)
-            http_basic:
-                realm:         "Secured Demo Area"
-                provider:       in_memory
 
-            stateless: true
 
         # This firewall is used to handle the public login area
         # This part is handled by the FOS User Bundle
@@ -85,6 +79,7 @@ security:
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
         - { path: ^/profile/, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
     acl:
         connection: default

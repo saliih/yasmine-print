@@ -32,13 +32,7 @@
         "setasign/fpdi": "1.6.1",
         "jms/di-extra-bundle": "^1.6",
         "jms/serializer-bundle": "^1.1",
-        "friendsofsymfony/rest-bundle": "^1.7",
-        "sonata-project/easy-extends-bundle": "~2.1",
-        "sonata-project/intl-bundle": "*",
-        "sonata-project/admin-bundle": "*",
-        "sonata-project/doctrine-orm-admin-bundle": "*",
-        "sonata-project/block-bundle": "*",
-        "sonata-project/user-bundle": "*"
+        "friendsofsymfony/rest-bundle": "^1.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

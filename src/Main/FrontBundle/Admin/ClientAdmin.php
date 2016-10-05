@@ -65,6 +65,7 @@ class ClientAdmin extends Admin
                 'actions' => array(
                     'show' => array(),
                     'delete' => array(),
+                    'pdf' => array('template'=>"MainFrontBundle:Bt:pdf.html.twig"),
 
                 )));
     }

@@ -19,9 +19,18 @@ boutique_detail:
 submit_details:
     path:     /submitdetails
     defaults: { _controller: MainFrontBundle:Caddy:submitdetails }
+panier:
+    path:     /panier
+    defaults: { _controller: MainFrontBundle:Caddy:panier }
+panier_delete:
+    path:     /panier/{id}
+    defaults: { _controller: MainFrontBundle:Caddy:panierdelete }
 gettemplates:
     path:     /api/{id}/templates
     defaults: { _controller: MainFrontBundle:Ajax:listTemplate }
 puttemplates:
     path:     /api/puttemplates
     defaults: { _controller: MainFrontBundle:Ajax:puttemplate }
+generatepdf:
+    path:     /generatepdf
+    defaults: { _controller: MainFrontBundle:Ajax:generatepdf }
