@@ -34,6 +34,9 @@ login:
 panier_delete:
     path:     /panier/{id}
     defaults: { _controller: MainFrontBundle:Caddy:panierdelete }
+drawAccrodion:
+    path:     /drawAccrodion/{id}
+    defaults: { _controller: MainFrontBundle:Ajax:drawAccrodion }
 gettemplates:
     path:     /api/{id}/templates
     defaults: { _controller: MainFrontBundle:Ajax:listTemplate }

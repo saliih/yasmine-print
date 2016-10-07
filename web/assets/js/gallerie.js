@@ -6,6 +6,27 @@ $(document).ready(function () {
         var bg = $(event.currentTarget).find('img').attr('src');
         $('#zoneedit').html('<img src='+bg+' width="425" height="275" />');
         $.ajax({
+            url: Routing.generate('drawAccrodion', {id: id}),
+            type: 'get',
+            dataType: 'html',
+            success: function (html) {
+                $('#accord').html(html);
+                $('.formtosave, .formtocolor,.formalign, .formpolice').on('keyup keypress blur change', function (event) {
+                    var id = $(this).attr('data-value');
+                    var text = $('#input-'+id).val();
+                    $('#box'+id).html(text);
+                    var color = $('#input-color-'+id).val();
+                    var align = $('#input-align-'+id).val();
+                    var police = $('#input-police-'+id).val();
+                    $('#box'+id).css({
+                        'text-align': align,
+                        'color':color,
+                        'font-family': police,
+                    });
+                });
+            }
+        });
+        $.ajax({
             url: Routing.generate('gettemplates', {id: id}),
             type: 'get',
             dataType: 'json',
@@ -26,38 +47,10 @@ $(document).ready(function () {
                         'left': (obj.y1/2)  + "px",
                     });
 
-                    $('#tableform tbody').append('<tr></tr>');
-                    $('#tableform tbody tr').eq(index).append(
-                        '<th>'+obj.name+'</th>' +
-                        '<td><input data-value="'+obj.id+'"  class="formtosave"  type="text" id="input-'+obj.id+'"/>' +
-                        '<td><input data-value="'+obj.id+'" value="'+obj.color+'"  class="formtocolor" placeholder="Coleur" type="text" id="input-color-'+obj.id+'"/></td>' +
-                        '<td><select placeholder="selectionnez" data-value="'+obj.id+'"  class="formalign form-control"  type="text" id="input-align-'+obj.id+'">' +
-                        '<option value="left">Gauche</option>' +
-                        '<option value="right">Droite</option>' +
-                        '<option value="center">Centre</option>' +
-                        '</select></td>' +
-                        '<td><select placeholder="selectionnez" data-value="'+obj.id+'"  class="formpolice form-control"  type="text" id="input-police-'+obj.id+'">' +
-                        '<option value="Arial">Arial</option>' +
-                        '<option value="Tahoma">Tahoma</option>' +
-                        '<option value="Verdana">Verdana</option>' +
-                        '</select></td>' +
-                        '</td>'
-                    );debugger;
+
                     $('#input-color-'+obj.id).colorpicker();
                     // put collapse
-                    $('.formtosave, .formtocolor,.formalign, .formpolice').on('keyup keypress blur change', function (event) {
-                       var id = $(this).attr('data-value');
-                        var text = $('#input-'+id).val();
-                        $('#box'+id).html(text);
-                        var color = $('#input-color-'+id).val();
-                        var align = $('#input-align-'+id).val();
-                        var police = $('#input-police-'+id).val();
-                        $('#box'+id).css({
-                            'text-align': align,
-                            'color':color,
-                            'font-family': police,
-                        });
-                    });
+
 
 
 

@@ -2,6 +2,8 @@
 
 namespace Main\FrontBundle\Controller;
 
+use Main\FrontBundle\Entity\cmdorder;
+use Main\FrontBundle\Entity\command;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Main\FrontBundle\Entity\client;
 use Main\FrontBundle\Form\clientType;
@@ -99,6 +101,7 @@ class CaddyController extends Controller
         ));
     }
     public function ValidateCmdAction(){
+        $em = $this->getDoctrine()->getManager();
         $request = $this->get('request');
         $service = $this->get('tools.utils');
         $session = $request->getSession();
@@ -106,8 +109,26 @@ class CaddyController extends Controller
             $caddy  = $this->getCaddy($session);
             $clientid = $session->get('client');
             $client = $this->getDoctrine()->getRepository('MainFrontBundle:client')->find($clientid);
+            $cmd = new command();
+            $cmd->setClient($client);
+            $dt = new \DateTime();
+            $nbcmd = $this->getDoctrine()->getRepository("MainFrontBundle:command")->findAll();
+            $ref = $dt->format("Ymd").(count($nbcmd)+1);
+            $cmd->setRef($ref);
+            $em->persist($cmd);
+            foreach($caddy as $line){
+                $ordetail = new cmdorder();
+                $prod = $line['prod'];
+                $ordetail->setProdid($prod);
+                $ordetail->setCmd($cmd);
+                $ordetail->setQte(1);
+                $ordetail->setPrice($line['opt']);
+                $em->persist($ordetail);
+            }
+            $em->flush();
             return $this->render('MainFrontBundle:Page:validateCmd.html.twig',array(
                 "panier"=>$caddy,
+                "cmd"=>$cmd,
                 "client"=>$client
             ));
         }else{

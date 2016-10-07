@@ -63,6 +63,11 @@ class AjaxController extends Controller
         $session->set('tpl',$tpl);
         return new Response(0);
     }
+    public function drawAccrodionAction($id){
+        $template = $this->getDoctrine()->getRepository('MainFrontBundle:tplprod')->find($id);
+
+        return $this->render('MainFrontBundle:Ajax:template.html.twig',array('template'=>$template));
+    }
     public function listTemplateAction($id)
     {
         $template = $this->getDoctrine()->getRepository('MainFrontBundle:tplprod')->find($id);
