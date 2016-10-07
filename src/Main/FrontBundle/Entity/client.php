@@ -24,16 +24,50 @@ class client
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="username", type="string", length=255)
+     */
+    private $username;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=10, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="dcr", type="datetime", nullable=true)
+     * @ORM\Column(name="fname", type="string", length=255)
      */
-    private $dcr;
+    private $fname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=255)
+     */
+    private $phone;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255)
+     */
+    private $adresse;
 
     /**
      * @var string
@@ -43,51 +77,26 @@ class client
     private $email;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="gsm", type="string", length=255)
+     * @ORM\Column(name="dcr", type="date")
      */
-    private $gsm;
+    private $dcr;
 
     /**
-     * @var string
+     * @var bool
      *
-     * @ORM\Column(name="adresse", type="string", length=255)
+     * @ORM\Column(name="act", type="boolean")
      */
-    private $adresse;
+    private $act;
+    public function __toString()
+    {
+        return $this->name." ".$this->fname;
+    }
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity="category", inversedBy="client")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")
-     **/
-    private $category;
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="plis", type="integer", nullable=true)
-     */
-    private $plis;
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="opti", type="integer", nullable=true)
-     */
-    private $option;
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="template", type="json_array", nullable=true)
-     */
-    private $template;
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="caddy", type="json_array", nullable=true)
-     */
-    private $caddy;
     public function __construct()
     {
+        $this->act = true;
         $this->dcr = new \DateTime();
     }
 
@@ -99,6 +108,79 @@ class client
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return client
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        $this->setUsername($this->getEmail());
+        return $this->username;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return client
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return client
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -126,27 +208,51 @@ class client
     }
 
     /**
-     * Set dcr
+     * Set fname
      *
-     * @param \DateTime $dcr
+     * @param string $fname
      *
      * @return client
      */
-    public function setDcr($dcr)
+    public function setFname($fname)
     {
-        $this->dcr = $dcr;
+        $this->fname = $fname;
 
         return $this;
     }
 
     /**
-     * Get dcr
+     * Get fname
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getDcr()
+    public function getFname()
     {
-        return $this->dcr;
+        return $this->fname;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return client
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 
     /**
@@ -174,27 +280,51 @@ class client
     }
 
     /**
-     * Set gsm
+     * Set dcr
      *
-     * @param string $gsm
+     * @param \DateTime $dcr
      *
      * @return client
      */
-    public function setGsm($gsm)
+    public function setDcr($dcr)
     {
-        $this->gsm = $gsm;
+        $this->dcr = $dcr;
 
         return $this;
     }
 
     /**
-     * Get gsm
+     * Get dcr
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getGsm()
+    public function getDcr()
     {
-        return $this->gsm;
+        return $this->dcr;
+    }
+
+    /**
+     * Set act
+     *
+     * @param boolean $act
+     *
+     * @return client
+     */
+    public function setAct($act)
+    {
+        $this->act = $act;
+
+        return $this;
+    }
+
+    /**
+     * Get act
+     *
+     * @return bool
+     */
+    public function getAct()
+    {
+        return $this->act;
     }
 
     /**
@@ -219,125 +349,5 @@ class client
     public function getAdresse()
     {
         return $this->adresse;
-    }
-
-    /**
-     * Set plis
-     *
-     * @param integer $plis
-     *
-     * @return client
-     */
-    public function setPlis($plis)
-    {
-        $this->plis = $plis;
-
-        return $this;
-    }
-
-    /**
-     * Get plis
-     *
-     * @return integer
-     */
-    public function getPlis()
-    {
-        return $this->plis;
-    }
-
-    /**
-     * Set option
-     *
-     * @param integer $option
-     *
-     * @return client
-     */
-    public function setOption($option)
-    {
-        $this->option = $option;
-
-        return $this;
-    }
-
-    /**
-     * Get option
-     *
-     * @return integer
-     */
-    public function getOption()
-    {
-        return $this->option;
-    }
-
-    /**
-     * Set template
-     *
-     * @param array $template
-     *
-     * @return client
-     */
-    public function setTemplate($template)
-    {
-        $this->template = $template;
-
-        return $this;
-    }
-
-    /**
-     * Get template
-     *
-     * @return array
-     */
-    public function getTemplate()
-    {
-        return $this->template;
-    }
-
-    /**
-     * Set category
-     *
-     * @param \Main\FrontBundle\Entity\category $category
-     *
-     * @return client
-     */
-    public function setCategory(\Main\FrontBundle\Entity\category $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return \Main\FrontBundle\Entity\category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * Set caddy
-     *
-     * @param array $caddy
-     *
-     * @return client
-     */
-    public function setCaddy($caddy)
-    {
-        $this->caddy = $caddy;
-
-        return $this;
-    }
-
-    /**
-     * Get caddy
-     *
-     * @return array
-     */
-    public function getCaddy()
-    {
-        return $this->caddy;
     }
 }

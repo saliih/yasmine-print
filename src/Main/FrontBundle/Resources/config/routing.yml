@@ -22,6 +22,15 @@ submit_details:
 panier:
     path:     /panier
     defaults: { _controller: MainFrontBundle:Caddy:panier }
+validate_cmd:
+    path:     /valider-ma-commande.html
+    defaults: { _controller: MainFrontBundle:Caddy:ValidateCmd }
+login_Page:
+    path:     /connexion.html
+    defaults: { _controller: MainFrontBundle:Caddy:Connexion }
+login:
+    path:     /login
+    defaults: { _controller: MainFrontBundle:Caddy:login }
 panier_delete:
     path:     /panier/{id}
     defaults: { _controller: MainFrontBundle:Caddy:panierdelete }

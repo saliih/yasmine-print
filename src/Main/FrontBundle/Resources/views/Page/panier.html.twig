@@ -28,7 +28,7 @@
             {% set opt = item['opt'] %}
             {% set total = total + opt %}
             <tr>
-                <td align="center"><img src="{{ asset(product.picture) }}" width="150"/></td>
+                <td align="center" width="160"><img src="{{ asset(product.picture) }}" width="150"/></td>
                 <td>{{ product.name }}</td>
                 <td>{{ opt }} <sup>DT</sup></td>
                 <td><a href="{{ path('panier_delete',{id: product.id}) }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
@@ -38,12 +38,12 @@
         <tfoot>
         <tr>
             <td></td>
-            <th>Total :</th>
+            <th style="text-align: right; padding-right: 10px;">Total :</th>
             <td>{{ total }} <sup>DT</sup></td>
         </tr>
         </tfoot>
         </table>
-        <a href="#" class="btn caddybt pull-right">Passer la commande</a>
+        <a href="{{ path('validate_cmd') }}" class="btn caddybt pull-right">Passer la commande</a>
         {% else %}
 
     Panier Vide{% endif %}        </div>

@@ -1,0 +1,142 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <div class="page-title">
+        <div class="container">
+            <h2 class="text-right text-uppercase">Connexion</h2>
+        </div>
+    </div>
+    <div class="container nos-produits">
+        <div class="row">
+            <div class="col-md-12">
+                {% for type, flashMessages in app.session.flashbag.all() %}
+                    {% for flashMessage in flashMessages %}
+                        <div class="mdi-alert-warning">{{ flashMessage|trans }}</div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+           <div class="col-md-6">
+               <form action="{{ path('login') }}" method="post" class="form-horizontal form">
+
+                   <div class="form-group">
+                       <label for="email" class="col-sm-offset-2 col-sm-3 control-label">E-mail</label>
+                       <div class="col-sm-6">
+                           <input type="text" placeholder= "Enter email" class="form-control" id="username" name="_username" value="" />
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="password" class="col-sm-offset-2 col-sm-3 control-label">Mot de passe</label>
+                       <div class="col-sm-6">
+                           <input type="password" id="password" name="_password" class="form-control" placeholder="Enter Mot De Passe" />
+                           <br><a href="{{ path('login_Page') }}">Mot de passe oublié ?</a>
+
+                       </div>
+                   </div>
+
+                   <div class="form-group">
+                       <div class="col-sm-10">
+                           <input type="submit" value="Se connecter" class="btn btn-infos pull-right">
+                       </div>
+                   </div>
+               </form>
+           </div>
+            <div class="col-md-6">
+                {{ form_start(form, {'method': 'POST','attr': {'class': 'form-horizontal form','id':'inscriptionForm'}}) }}
+                <div class="form-group">
+                    <label for="titre" class="col-sm-offset-2 col-sm-2 control-label bold">Civilité</label>
+
+                    <div class="col-sm-6">
+                        {{ form_widget(form.title, { 'attr': {'class': "form-control"} }) }}
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nom" class="col-sm-offset-2 col-md-2 col-sm-2 control-label">Prénom / Nom</label>
+
+                    <div class="col-md-3 col-sm-3">
+                        {{ form_widget(form.fname, { 'attr': {'class': "form-control",
+                            'placeholder': "Enter votre Prénom"} }) }}
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        {{ form_widget(form.name, { 'attr': {'class': "form-control",
+                            'placeholder': "Enter votre Nom"} }) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="adresse" class="col-sm-offset-2 col-sm-2 control-label">Adresse</label>
+
+                    <div class="col-md-6 control-label">
+                        {{ form_widget(form.adresse, { 'attr': {'class': "form-control",
+                            'placeholder': "Enter votre Adresse"} }) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="col-sm-offset-2 col-sm-2 control-label">Téléphone</label>
+
+                    <div class="col-sm-6">
+                        {{ form_widget(form.phone, { 'attr': {'class': "form-control",
+                            'placeholder': "Enter votre Numero de Télephone"} }) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-offset-2 col-sm-2 control-label">E-mail</label>
+
+                    <div class="col-sm-6">
+                        {{ form_widget(form.email, { 'attr': {'class': "form-control",
+                            'placeholder': "Enter votre E-Mail"} }) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-offset-2 col-sm-2 control-label">Mot de passe</label>
+
+                    <div class="col-sm-6">
+                        {{ form_widget(form.password, { 'attr': {'class': "form-control",
+                            'placeholder': "Enter votre Mot de passe"} }) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-9">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Se connecter automatiquement depuis cet ordinateur
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-9">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Je veux recevoir des e-mails personnalisés sur les meilleurs commerces
+                                locaux, produits et voyages. (en fonction de mon lieu de résidence, de mes préférences de
+                                navigation sur internet et mobile, des données fournies par les cookies ou autres dispositifs,
+                                de mon historique d’achat et d’autres informations).
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-9">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="cgv"> J'accepte les <a class="light-blue" target="_blank" href="#">Conditions générales de
+                                    commercialisation</a> ainsi que la <a class="light-blue" target="_blank" href="#">Politique de confidentialité</a>.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-7 col-sm-2">
+                        <input type="submit" id="submit" value="S'inscrire" class="btn btn-infos">
+                    </div>
+
+                </div>
+                <input type="hidden" name="localite" id="localite">
+                {{ form_widget(form._token) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
