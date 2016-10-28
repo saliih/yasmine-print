@@ -51,15 +51,30 @@ class command
      **/
     private $client;
     /**
+     * @var array
+     *
+     * @ORM\Column(name="aaaa", type="array")
+     */
+    private $toprint;
+    /**
+     * tostring
+     */
+    public function __toString()
+    {
+        return $this->ref;
+    }
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->dcr = new \DateTime();
         $this->act = false;
-
         $this->detail = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+
 
     /**
      * Get id
@@ -199,5 +214,30 @@ class command
     public function getClient()
     {
         return $this->client;
+    }
+
+
+    /**
+     * Set toprint
+     *
+     * @param array $toprint
+     *
+     * @return command
+     */
+    public function setToprint($toprint)
+    {
+        $this->toprint = $toprint;
+
+        return $this;
+    }
+
+    /**
+     * Get toprint
+     *
+     * @return array
+     */
+    public function getToprint()
+    {
+        return $this->toprint;
     }
 }

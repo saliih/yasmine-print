@@ -22,7 +22,7 @@
                 <div class="item">
                     {% set slug = item.name|slugifier %}
                     <a href="{{ path('boutique_detail',{id:item.id,slug:slug}) }}">
-                        <img src="{{ asset('uploads/products/'~item.picture) }}" alt="Image">
+                        <img src="{{ asset(item.picture) }}" alt="Image">
                         <div class="item-content " style="background: {{ item.color }}">{{ item.name }}</div>
                     </a>
                 </div>

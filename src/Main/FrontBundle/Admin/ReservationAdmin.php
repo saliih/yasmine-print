@@ -15,7 +15,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class ClientAdmin extends Admin
+class ReservationAdmin extends Admin
 {
     protected $datagridValues = array(
 
@@ -32,21 +32,14 @@ class ClientAdmin extends Admin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('name');
+        $datagridMapper->add('ref');
     }
     public function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('name')
+            ->add('ref')
             ->add('dcr')
-            ->add('email')
-            ->add('gsm')
-            ->add('adresse')
-            ->add('category')
-           // ->add('plis')
-           // ->add('option')
-          //  ->add('template')
-           // ->add('caddy')
+            ->add('detail')
         ;
     }
 
@@ -59,7 +52,7 @@ class ClientAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier("name",null,array('label'=>'Client'))
+            ->add("ref",null,array('label'=>'Reference'))
             ->add("dcr")
             ->add('_action', 'actions', array(
                 'actions' => array(

@@ -13,45 +13,66 @@
                  aria-labelledby="headingOne{{ item.id }}">
                 <div class="panel-body">
                     <div class="form-group col-md-12">
-{% if item.type ==0 %}
-                        <label class="col-md-6" for="main_frontbundle_contact_name">Texte</label>
-                        <input data-value="{{ item.id }}" class="formtosave form-control" type="text"
-                               id="input-{{ item.id }}"/>
-                        {% else %}
+                        {% if item.type ==0 %}
                             <label class="col-md-6" for="main_frontbundle_contact_name">Texte</label>
-                            <input data-value="{{ item.id }}" class="formtosave form-control" type="file"
+                            <input data-value="{{ item.id }}" name="input-text[]" class="formtosave form-control" type="text"
                                    id="input-{{ item.id }}"/>
+                        {% else %}
+                            <label class="col-md-6" for="main_frontbundle_contact_name">Image</label>
+                            <input data-value="{{ item.id }}" name="input-text[]" datatype="file" class="formtosave form-control" type="hidden"
+                                   id="input-{{ item.id }}"/><div style="clear: both;"></div>
+                            <div id="fileuploader{{ item.id }}">Upload</div>
+
+                            <script>
+                            $(document).ready(function () {
+                                $('#fileuploader{{ item.id }}').uploadFile({
+                                    url:Routing.generate('uploadfiles'),
+                                    fileName:"myfile",
+                                    onSuccess:function(files,data,xhr,pd)
+                                    {
+                                        $('#input-{{ item.id }}').val(data);
+                                        $('#input-{{ item.id }}').trigger("change");
+                                    }
+                                });
+
+                            });
+                        </script>
                         {% endif %}
+                        
                     </div>
-                    <div class="form-group col-md-12">
+                    {% if item.type ==0 %}
+                        <div class="form-group col-md-12">
 
-                        <label class="col-md-6" for="main_frontbundle_contact_name">Couleur</label>
-                        <input data-value="{{ item.id }}" value="{{ item.color }}" class="formtosave form-control"
-                               placeholder="Coleur" type="text" id="input-color-{{ item.id }}"/>
-                    </div>
-                    <div class="form-group col-md-12">
+                            <label class="col-md-6" for="main_frontbundle_contact_name">Couleur</label>
+                            <input data-value="{{ item.id }}" name="input-color[]" value="{{ item.color }}" class="formtosave form-control"
+                                   placeholder="Coleur" type="text" id="input-color-{{ item.id }}"/>
+                        </div>
 
-                        <label class="col-md-6" for="main_frontbundle_contact_name">Alignement</label>
+                        <div class="form-group col-md-12">
 
-                        <select placeholder="selectionnez" data-value="{{ item.id }}" class="formalign form-control"
-                                type="text" id="input-align-{{ item.id }}">
-                            <option value="left">Gauche</option>
-                            <option value="right">Droite</option>
-                            <option value="center">Centre</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-12">
+                            <label class="col-md-6" for="main_frontbundle_contact_name">Alignement</label>
 
-                        <label class="col-md-6" for="main_frontbundle_contact_name">Police</label>
+                            <select name="input-align[]" placeholder="selectionnez" data-value="{{ item.id }}" class="formalign form-control"
+                                    type="text" id="input-align-{{ item.id }}">
+                                <option value="left">Gauche</option>
+                                <option value="right">Droite</option>
+                                <option value="center">Centre</option>
+                            </select>
+                        </div>
 
-                        <select placeholder="selectionnez" data-value="{{ item.id }}" class="formpolice form-control"
-                                type="text" id="input-police-{{ item.id }}">
-                            <option value="Arial">Arial</option>
-                            <option value="Tahoma">Tahoma</option>
-                            <option value="Verdana">Verdana</option>
-                        </select>
-                    </div>
+                        <div class="form-group col-md-12">
 
+                            <label class="col-md-6" for="main_frontbundle_contact_name">Police</label>
+
+                            <select placeholder="selectionnez" name="input-police[]" data-value="{{ item.id }}"
+                                    class="formpolice form-control"
+                                    type="text" id="input-police-{{ item.id }}">
+                                <option value="Arial">Arial</option>
+                                <option value="Tahoma">Tahoma</option>
+                                <option value="Verdana">Verdana</option>
+                            </select>
+                        </div>
+                    {% endif %}
 
                 </div>
             </div>

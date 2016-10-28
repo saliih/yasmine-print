@@ -1,21 +1,26 @@
 {% extends '::base.html.twig' %}
 {% block javascripts %}
     {{ parent() }}
-    $
+    <script type="text/javascript" src="{{ asset('tinymce/tinymce.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/jquery.fancybox.js?v=2.1.5') }}"></script>
+
     <script src="{{ asset('assets/js/bootstrap-colorpicker.min.js') }}"></script>
-    <script src="{{ asset('assets/js/details.js') }}"></script>
     <script src="{{ asset('assets/js/details.js') }}"></script>
     <script src="{{ asset('public/js/bootbox.min.js') }}"></script>
     <script>
         var idprod = {{ product.id }};
     </script>
 
+
+    <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
     <script src="{{ asset('assets/js/gallerie.js') }}"></script>
 
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-colorpicker.min.css') }}">
+    <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.fancybox.css?v=2.1.5') }}" media="screen" />
 
 {% endblock %}
 {% block body %}
@@ -154,11 +159,11 @@
                     <h4 class="modal-title">Personalisation</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="row">
+                    <div class="row" >
                         <div class="col-md-6" id="zoneedit">
 
                         </div>
-                        <form id="formcarte">
+                        <form id="formcarte" method="post" action="#" enctype="multipart/form-data">
                             <div class="col-md-6" id="accord">
 
                             </div>

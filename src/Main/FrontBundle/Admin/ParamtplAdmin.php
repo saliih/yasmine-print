@@ -37,9 +37,9 @@ class ParamtplAdmin extends Admin
             ),));
         $formMapper->add('x1');
         $formMapper->add('y1');
-        $formMapper->add('x2');
-        $formMapper->add('y2');
-        $formMapper->add('size');
+        $formMapper->add('x2',null,array('label'=>"width"));
+        $formMapper->add('y2',null,array('label'=>"height"));
+        $formMapper->add('size',null,array('label'=>"font-size"));
         $formMapper->add('police');
         $formMapper->add('align', 'choice', array(
             'placeholder' => 'choisisser un type',

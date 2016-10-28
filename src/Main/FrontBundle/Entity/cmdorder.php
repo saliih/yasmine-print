@@ -64,7 +64,13 @@ class cmdorder
      * @ORM\Column(name="customise", type="array")
      */
     private $customise;
-
+    /**
+     * tostring
+     */
+    public function __toString()
+    {
+        return $this->getProdid()->getName();
+    }
     /**
      * Get id
      *

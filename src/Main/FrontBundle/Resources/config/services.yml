@@ -70,9 +70,9 @@ services:
 
 
 
-    admin.client:
-        class: Main\FrontBundle\Admin\ClientAdmin
-        arguments: [~, Main\FrontBundle\Entity\client, ~]
+    admin.reservation:
+        class: Main\FrontBundle\Admin\ReservationAdmin
+        arguments: [~, Main\FrontBundle\Entity\command, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Réservation, group: Feedback,  icon: '<i class="fa fa-archive"></i>'}
 

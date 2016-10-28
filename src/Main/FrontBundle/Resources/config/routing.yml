@@ -46,3 +46,7 @@ puttemplates:
 generatepdf:
     path:     /generatepdf
     defaults: { _controller: MainFrontBundle:Ajax:generatepdf }
+
+uploadfiles:
+    path:     /uploadfiles
+    defaults: { _controller: MainFrontBundle:Ajax:uploadfiles }
