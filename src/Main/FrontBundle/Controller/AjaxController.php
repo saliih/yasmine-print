@@ -2,6 +2,7 @@
 
 namespace Main\FrontBundle\Controller;
 
+use Main\FrontBundle\Entity\command;
 use Main\FrontBundle\Entity\paramtpl;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -9,20 +10,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AjaxController extends Controller
 {
-    public function generatepdfAction()
+    public function generatepdfAction(command $commande)
     {
         $request = $this->get('request');
         $tools = $this->get('tools.utils');
         $session = $request->getSession();
         if ($session->has('tpl')) {
-            $tpl = $session->get('tpl');
-            //$tools->dump($tpl);
+            $tpl = $commande->getToprint();
             $pdffile = "";
             foreach ($tpl as $key => $elemnt) {
-                $prod = $this->getDoctrine()->getRepository('MainFrontBundle:tplprod')->find($key);
-                // = $this->get('kernel')->getRootDir() . '/../web/' . $prod->getPdf();
+                foreach($elemnt as $val) {
+                    $prod = $this->getDoctrine()->getRepository('MainFrontBundle:paramtpl')->find($val['id']);
+                    $template = $prod->getTpl();
+                    $tplpdf = str_replace("../","",$template->getPdf());
+                    $pdffile = $this->get('kernel')->getRootDir() . '/../web/' .$tplpdf;
+                }
             }
-            $pdffile = "/var/www/yasmine-print/web/uploads/products/carte/4.pdf";
             $custom_layout = array(85, 55);
             $orientation = 'L';
             $pdf = new \FPDI($orientation, 'mm', $custom_layout, true, 'UTF-8', false);

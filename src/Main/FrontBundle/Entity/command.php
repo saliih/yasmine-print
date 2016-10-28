@@ -53,7 +53,7 @@ class command
     /**
      * @var array
      *
-     * @ORM\Column(name="aaaa", type="array")
+     * @ORM\Column(name="toprint", type="json_array")
      */
     private $toprint;
     /**

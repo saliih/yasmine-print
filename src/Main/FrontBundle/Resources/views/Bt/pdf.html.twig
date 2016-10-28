@@ -1,4 +1,6 @@
-<a href="{{ path('generatepdf') }}" class="btn btn-sm btn-default " title="Pdf">
+{% if object.toprint|length>0 %}
+<a href="{{ path('generatepdf',{id:object.id}) }}" target="_blank" class="btn btn-sm btn-default " title="Pdf">
     <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
     Fichier pdf
 </a>
+{% endif %}

@@ -106,10 +106,16 @@ class CaddyController extends Controller
         $service = $this->get('tools.utils');
         $session = $request->getSession();
         if($session->has('client')){
+
             $caddy  = $this->getCaddy($session);
             $clientid = $session->get('client');
             $client = $this->getDoctrine()->getRepository('MainFrontBundle:client')->find($clientid);
             $cmd = new command();
+            if($session->has('tpl')){
+                $tpl = $session->get('tpl');
+                //echo "<pre>";print_r($tpl);exit;
+                $cmd->setToprint($tpl);
+            }
             $cmd->setClient($client);
             $dt = new \DateTime();
             $nbcmd = $this->getDoctrine()->getRepository("MainFrontBundle:command")->findAll();
